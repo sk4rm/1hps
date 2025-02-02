@@ -671,7 +671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6253638560025523683, guid: bc8ce5f92a3a8a245bcb815d0eed3ba4, type: 3}
       propertyPath: speed
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6253638560025523683, guid: bc8ce5f92a3a8a245bcb815d0eed3ba4, type: 3}
       propertyPath: camera
@@ -773,7 +773,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167967459}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14223026, y: -0.000000014241559, z: 0.0000000020463848, w: 0.9898336}
+  m_LocalRotation: {x: 0.14223024, y: -0.000000032981266, z: 0.0000000047391127, w: 0.9898336}
   m_LocalPosition: {x: 0, y: 12.25, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1094,7 +1094,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1711606814}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14223024, y: -0.000000014241558, z: 0.0000000020463844, w: 0.98983365}
+  m_LocalRotation: {x: 0.14223023, y: -0.000000032981266, z: 0.000000004739112, w: 0.98983365}
   m_LocalPosition: {x: 0, y: 12.25, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
