@@ -26,9 +26,9 @@ public class PlayerSpawner : NetworkBehaviour
         
         var player = Instantiate(playerPrefab);
         var networkObject = player.GetComponent<NetworkObject>();
-        networkObject.Spawn();
         
         player.transform.position = spawnPosition;
+        networkObject.Spawn();
         
         SetCinemachineTargetRpc(networkObject.NetworkObjectId, rpcParams.Receive.SenderClientId);
     }
