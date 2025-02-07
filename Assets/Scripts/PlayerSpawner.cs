@@ -22,15 +22,16 @@ public class PlayerSpawner : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void SpawnPlayerRpc(RpcParams rpcParams = default)
     {
-        Debug.Log($"Player {rpcParams.Receive.SenderClientId} is trying to spawn");
+        var senderId = rpcParams.Receive.SenderClientId;
         
         var player = Instantiate(playerPrefab);
-        var networkObject = player.GetComponent<NetworkObject>();
-        
         player.transform.position = spawnPosition;
-        networkObject.Spawn();
         
-        SetCinemachineTargetRpc(networkObject.NetworkObjectId, rpcParams.Receive.SenderClientId);
+        var networkObject = player.GetComponent<NetworkObject>();
+        networkObject.SpawnWithOwnership(senderId);
+        Debug.Log($"Spawned player {senderId} into the world!");
+        
+        SetCinemachineTargetRpc(networkObject.NetworkObjectId, senderId);
     }
 
     [Rpc(SendTo.ClientsAndHost)]

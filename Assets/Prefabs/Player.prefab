@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 8039324583264944184}
   - component: {fileID: 2268693731784113893}
   - component: {fileID: 4190348843952322456}
-  - component: {fileID: -4524158560478108963}
+  - component: {fileID: 5994332144534573633}
   - component: {fileID: 6253638560025523683}
   m_Layer: 0
   m_Name: Player
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkTransformExpanded: 0
-  AuthorityMode: 1
+  AuthorityMode: 0
   TickSyncChildren: 0
   UseUnreliableDeltas: 0
   SyncPositionX: 1
@@ -231,9 +231,9 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 1
---- !u!114 &-4524158560478108963
+--- !u!114 &5994332144534573633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,5 +265,5 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   rigidbody: {fileID: 4190348843952322456}
   camera: {fileID: 0}
-  speed: 50
+  speed: 20
   jumpSpeed: 10
