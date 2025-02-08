@@ -1,28 +1,26 @@
-using System;
 using Unity.Netcode;
 using UnityEngine;
 
 public class ChatSystem : NetworkBehaviour
 {
-    [SerializeField] private string chat;
-    private const string MessageOfTheDay = "<i>Press ENTER to chat</i>";
+    public delegate void OnReceiveDelegate(string message);
 
-    public override void OnNetworkSpawn()
-    {
-        chat = MessageOfTheDay;
-        OnReceive?.Invoke(MessageOfTheDay);
-        
-        Debug.Log($"Chat system initialized!");
-    }
+    private const string MessageOfTheDay = "<i>Press ENTER to chat</i>";
 
     private void OnEnable()
     {
-        UIManager.OnMessageSubmitted += SendChat;
+        UIManager.OnChatBarSubmit += SendChat;
     }
 
     private void OnDisable()
     {
-        UIManager.OnMessageSubmitted -= SendChat;
+        UIManager.OnChatBarSubmit -= SendChat;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        OnReceive?.Invoke(MessageOfTheDay);
+        Debug.Log("Chat system initialized!");
     }
 
     private void SendChat(string message)
@@ -35,11 +33,8 @@ public class ChatSystem : NetworkBehaviour
     {
         var senderId = rpcParams.Receive.SenderClientId;
         var entry = $"\nPlayer {senderId}: {message}";
-        
-        chat += entry;
         OnReceive?.Invoke(entry);
     }
 
-    public delegate void OnReceiveDelegate(string message);
     public static event OnReceiveDelegate OnReceive;
 }

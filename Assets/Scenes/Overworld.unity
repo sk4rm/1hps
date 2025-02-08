@@ -2198,7 +2198,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  chat: 
 --- !u!1 &993775124
 GameObject:
   m_ObjectHideFlags: 0
@@ -2549,7 +2548,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.0002746582}
   m_SizeDelta: {x: 0, y: -162.1427}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1131743505
@@ -2574,8 +2573,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d66d61b516df9b74db569d7ff53917ff, type: 2}
-  m_sharedMaterial: {fileID: -1902654772266739946, guid: d66d61b516df9b74db569d7ff53917ff, type: 2}
+  m_fontAsset: {fileID: 0}
+  m_sharedMaterial: {fileID: 2103692308026634476, guid: 83a9299aca809544983a07fd38157ec0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2640,7 +2639,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1131743506
@@ -2747,7 +2746,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 455998802}
   m_HandleRect: {fileID: 455998801}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2927,7 +2926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1158465514
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2989,8 +2988,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enter text...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d66d61b516df9b74db569d7ff53917ff, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 83a9299aca809544983a07fd38157ec0, type: 2}
+  m_sharedMaterial: {fileID: 2103692308026634476, guid: 83a9299aca809544983a07fd38157ec0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3651,8 +3650,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d66d61b516df9b74db569d7ff53917ff, type: 2}
-  m_sharedMaterial: {fileID: -1902654772266739946, guid: d66d61b516df9b74db569d7ff53917ff, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 83a9299aca809544983a07fd38157ec0, type: 2}
+  m_sharedMaterial: {fileID: 2103692308026634476, guid: 83a9299aca809544983a07fd38157ec0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

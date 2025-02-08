@@ -1,12 +1,12 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 public class UIManager : MonoBehaviour
 {
+    public delegate void OnMessageSubmittedDelegate(string message);
+
     [SerializeField] private RectTransform chatBox;
     [SerializeField] private TextMeshProUGUI chatBoxBody;
     [SerializeField] private RectTransform chatBar;
@@ -19,7 +19,16 @@ public class UIManager : MonoBehaviour
     {
         chatBarInput.onFocusSelectAll = true;
     }
-    
+
+    private void Update()
+    {
+        if (!_pauseHideChatTimer)
+        {
+            _hideChatTimer = Math.Max(0, _hideChatTimer - Time.deltaTime);
+            if (_hideChatTimer <= 0) chatBox.gameObject.SetActive(false);
+        }
+    }
+
     private void OnEnable()
     {
         PlayerControls.Instance.Actions.UI.OpenChat.performed += OpenChatBox;
@@ -55,7 +64,7 @@ public class UIManager : MonoBehaviour
     {
         if (chatBarInput.isFocused)
         {
-            OnMessageSubmitted?.Invoke(chatBarInput.text);
+            OnChatBarSubmit?.Invoke(chatBarInput.text);
             chatBarInput.text = "";
             chatBarInput.Select();
         }
@@ -76,15 +85,5 @@ public class UIManager : MonoBehaviour
         FlashChatBox(chatShowDurationSeconds);
     }
 
-    private void Update()
-    {
-        if (!_pauseHideChatTimer)
-        {
-            _hideChatTimer = Math.Max(0, _hideChatTimer - Time.deltaTime);
-            if (_hideChatTimer <= 0) chatBox.gameObject.SetActive(false);
-        }
-    }
-
-    public delegate void OnMessageSubmittedDelegate(string message);
-    public static event OnMessageSubmittedDelegate OnMessageSubmitted;
+    public static event OnMessageSubmittedDelegate OnChatBarSubmit;
 }
