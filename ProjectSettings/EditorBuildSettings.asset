@@ -5,12 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
+    path: Assets/NGO_Minimal_Setup/NGO_Setup.unity
+    guid: 773dc5a2910fb8a4e90ec232102246a8
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/NGO_Minimal_Setup/NGO_Setup.unity
-    guid: 773dc5a2910fb8a4e90ec232102246a8
+    path: Assets/Scenes/Start.unity
+    guid: a4d6494e5bcbb0649a26fbb82c6829b1
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: b5b8846c803c14d4b84160446fdd7acb
   - enabled: 1
     path: Assets/Scenes/Overworld.unity
     guid: 78c2431b85fb716439b58c0582309294

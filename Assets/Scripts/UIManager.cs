@@ -7,8 +7,8 @@ public class UIManager : MonoBehaviour
 {
     public delegate void OnMessageSubmittedDelegate(string message);
 
-    [Header("Chat UI")]
-    [SerializeField] private RectTransform chatBox;
+    [Header("Chat UI")] [SerializeField] private RectTransform chatBox;
+
     [SerializeField] private TextMeshProUGUI chatBoxText;
     [SerializeField] private RectTransform chatBar;
     [SerializeField] private TMP_InputField chatBarText;

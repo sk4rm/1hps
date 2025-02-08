@@ -11,12 +11,12 @@ public class PlayerControls : MonoBehaviour
 
         if (Instance != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
 
         Instance = this;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
 
         #endregion
 
