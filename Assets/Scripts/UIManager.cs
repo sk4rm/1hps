@@ -14,6 +14,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float chatShowDurationSeconds = 3;
     private float _hideChatTimer;
     private bool _pauseHideChatTimer;
+
+    private void Awake()
+    {
+        chatBarInput.onFocusSelectAll = true;
+    }
     
     private void OnEnable()
     {
@@ -36,6 +41,7 @@ public class UIManager : MonoBehaviour
         chatBox.gameObject.SetActive(true);
         chatBar.gameObject.SetActive(true);
         _pauseHideChatTimer = true;
+        chatBarInput.Select();
     }
 
     private void FlashChatBox(float durationSeconds)
@@ -51,6 +57,7 @@ public class UIManager : MonoBehaviour
         {
             OnMessageSubmitted?.Invoke(chatBarInput.text);
             chatBarInput.text = "";
+            chatBarInput.Select();
         }
     }
 

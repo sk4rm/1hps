@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -9,12 +10,19 @@ public class ChatSystem : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         chat = MessageOfTheDay;
-        OnReceive?.Invoke(chat);
+        OnReceive?.Invoke(MessageOfTheDay);
+        
+        Debug.Log($"Chat system initialized!");
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         UIManager.OnMessageSubmitted += SendChat;
+    }
+
+    private void OnDisable()
+    {
+        UIManager.OnMessageSubmitted -= SendChat;
     }
 
     private void SendChat(string message)
@@ -27,12 +35,11 @@ public class ChatSystem : NetworkBehaviour
     {
         var senderId = rpcParams.Receive.SenderClientId;
         var entry = $"\nPlayer {senderId}: {message}";
-
+        
         chat += entry;
-        Debug.Log(chat);
         OnReceive?.Invoke(entry);
     }
 
-    public delegate void OnReceiveDelegate(string chat);
+    public delegate void OnReceiveDelegate(string message);
     public static event OnReceiveDelegate OnReceive;
 }
