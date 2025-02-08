@@ -24,7 +24,7 @@ public class PlayerMovement : NetworkBehaviour
         forward.Normalize();
         right.Normalize();
 
-        var axis = PlayerControls.instance.ReadMoveAxis();
+        var axis = PlayerControls.Instance.Actions.Player.Move.ReadValue<Vector2>();
         var direction = forward * axis.y + right * axis.x;
 
         Move(direction);
@@ -32,12 +32,12 @@ public class PlayerMovement : NetworkBehaviour
 
     private void OnEnable()
     {
-        PlayerControls.instance.OnJump += Jump;
+        PlayerControls.Instance.Actions.Player.Jump.performed += Jump;
     }
 
     private void OnDisable()
     {
-        PlayerControls.instance.OnJump -= Jump;
+        PlayerControls.Instance.Actions.Player.Jump.performed -= Jump;
     }
 
     private void Move(Vector3 direction)
@@ -50,7 +50,7 @@ public class PlayerMovement : NetworkBehaviour
     private void MoveRpc(Vector3 direction)
     {
         // Debug.Log($"MoveRpc invoked on network object #{NetworkObjectId} by {rpcParams.Receive.SenderClientId}");
-        
+
         var velocity = new Vector3(0, rigidbody.linearVelocity.y, 0)
         {
             x = direction.x * speed,
@@ -58,7 +58,7 @@ public class PlayerMovement : NetworkBehaviour
         };
         rigidbody.linearVelocity = velocity;
     }
-    
+
     private void Jump(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;

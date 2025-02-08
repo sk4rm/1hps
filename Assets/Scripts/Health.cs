@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Health : NetworkBehaviour
 {
-    [SerializeField] private NetworkVariable<int> health;
     private const int InitialHealth = 1;
+    [SerializeField] private NetworkVariable<int> health;
 
     public override void OnNetworkSpawn()
     {
