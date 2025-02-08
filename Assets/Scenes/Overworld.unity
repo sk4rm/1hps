@@ -3281,8 +3281,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatBox: {fileID: 710022778}
+  chatBoxBody: {fileID: 1131743505}
   chatBar: {fileID: 1026362389}
-  chatInput: {fileID: 1026362390}
+  chatBarInput: {fileID: 1026362390}
   chatShowDurationSeconds: 3
 --- !u!1 &1711606814
 GameObject:

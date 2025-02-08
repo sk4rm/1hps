@@ -8,8 +8,9 @@ using UnityEngine.Rendering;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private RectTransform chatBox;
+    [SerializeField] private TextMeshProUGUI chatBoxBody;
     [SerializeField] private RectTransform chatBar;
-    [SerializeField] private TMP_InputField chatInput;
+    [SerializeField] private TMP_InputField chatBarInput;
     [SerializeField] private float chatShowDurationSeconds = 3;
     private float _hideChatTimer;
     private bool _pauseHideChatTimer;
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour
     private void OnDisable()
     {
         PlayerControls.Instance.Actions.UI.OpenChat.performed -= OpenChatBox;
+        PlayerControls.Instance.Actions.UI.Submit.performed -= Submit;
         PlayerControls.Instance.Actions.UI.Cancel.performed -= Cancel;
         ChatSystem.OnReceive -= OnChatMessageReceived;
     }
@@ -45,10 +47,10 @@ public class UIManager : MonoBehaviour
 
     private void Submit(InputAction.CallbackContext ctx)
     {
-        if (chatInput.isFocused)
+        if (chatBarInput.isFocused)
         {
-            OnMessageSubmitted?.Invoke(chatInput.text);
-            chatInput.text = "";
+            OnMessageSubmitted?.Invoke(chatBarInput.text);
+            chatBarInput.text = "";
         }
     }
 
@@ -63,6 +65,7 @@ public class UIManager : MonoBehaviour
 
     private void OnChatMessageReceived(string message)
     {
+        chatBoxBody.text += message;
         FlashChatBox(chatShowDurationSeconds);
     }
 

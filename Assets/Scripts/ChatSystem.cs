@@ -1,5 +1,3 @@
-using System;
-using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -11,7 +9,7 @@ public class ChatSystem : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         chat = MessageOfTheDay;
-        OnReceive?.Invoke(MessageOfTheDay);
+        OnReceive?.Invoke(chat);
     }
 
     private void Awake()
@@ -21,9 +19,20 @@ public class ChatSystem : NetworkBehaviour
 
     private void SendChat(string message)
     {
-        //TODO: RPC to send message and synchronize with clients
+        SendChatRpc(message);
     }
 
-    public delegate void OnReceiveDelegate(string message);
+    [Rpc(SendTo.ClientsAndHost)]
+    private void SendChatRpc(string message, RpcParams rpcParams = default)
+    {
+        var senderId = rpcParams.Receive.SenderClientId;
+        var entry = $"\nPlayer {senderId}: {message}";
+
+        chat += entry;
+        Debug.Log(chat);
+        OnReceive?.Invoke(entry);
+    }
+
+    public delegate void OnReceiveDelegate(string chat);
     public static event OnReceiveDelegate OnReceive;
 }
