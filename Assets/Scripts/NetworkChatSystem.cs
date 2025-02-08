@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class ChatSystem : NetworkBehaviour
+public class NetworkChatSystem : NetworkBehaviour
 {
     public delegate void OnReceiveDelegate(string message);
 

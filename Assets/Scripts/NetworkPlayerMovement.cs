@@ -2,7 +2,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : NetworkBehaviour
+public class NetworkPlayerMovement : NetworkBehaviour
 {
     [SerializeField] private new Rigidbody rigidbody;
     [SerializeField] private new Camera camera;

@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
         PlayerControls.Instance.Actions.UI.OpenChat.performed += OpenChatBox;
         PlayerControls.Instance.Actions.UI.Submit.performed += Submit;
         PlayerControls.Instance.Actions.UI.Cancel.performed += Cancel;
-        ChatSystem.OnReceive += OnChatMessageReceived;
+        NetworkChatSystem.OnReceive += OnChatMessageReceived;
     }
 
     private void OnDisable()
@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour
         PlayerControls.Instance.Actions.UI.OpenChat.performed -= OpenChatBox;
         PlayerControls.Instance.Actions.UI.Submit.performed -= Submit;
         PlayerControls.Instance.Actions.UI.Cancel.performed -= Cancel;
-        ChatSystem.OnReceive -= OnChatMessageReceived;
+        NetworkChatSystem.OnReceive -= OnChatMessageReceived;
     }
 
     private void OpenChatBox(InputAction.CallbackContext ctx)

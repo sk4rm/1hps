@@ -2,19 +2,19 @@ using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerSpawner : NetworkBehaviour
+public class NetworkPlayerSpawner : NetworkBehaviour
 {
-    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject networkPlayerPrefab;
     [SerializeField] private Vector3 spawnPosition;
 
     public override void OnNetworkSpawn()
     {
         // Debug.Log($"IsOwner: {IsOwner}, IsHost: {IsHost}, IsClient: {IsClient}, IsServer: {IsServer}");
 
-        SpawnPlayer();
+        SpawnNetworkPlayer();
     }
 
-    private void SpawnPlayer()
+    private void SpawnNetworkPlayer()
     {
         SpawnPlayerRpc();
     }
@@ -24,7 +24,7 @@ public class PlayerSpawner : NetworkBehaviour
     {
         var senderId = rpcParams.Receive.SenderClientId;
 
-        var player = Instantiate(playerPrefab);
+        var player = Instantiate(networkPlayerPrefab);
         player.transform.position = spawnPosition;
 
         var networkObject = player.GetComponent<NetworkObject>();

@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 122112526}
   - component: {fileID: 122112527}
   m_Layer: 0
-  m_Name: Player Spawner
+  m_Name: Network Player Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  playerPrefab: {fileID: 4892509814137612261, guid: bc8ce5f92a3a8a245bcb815d0eed3ba4, type: 3}
+  networkPlayerPrefab: {fileID: 0}
   spawnPosition: {x: 0, y: 2, z: 0}
 --- !u!4 &122112528
 Transform:
@@ -2139,7 +2139,7 @@ GameObject:
   - component: {fileID: 938827007}
   - component: {fileID: 938827008}
   m_Layer: 0
-  m_Name: Chat System
+  m_Name: Network Chat System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2801,9 +2801,8 @@ GameObject:
   - component: {fileID: 1150668341}
   - component: {fileID: 1150668342}
   - component: {fileID: 1150668343}
-  - component: {fileID: 1150668344}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: Network Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2896,18 +2895,6 @@ MonoBehaviour:
     PacketDelayMS: 0
     PacketJitterMS: 0
     PacketDropRate: 0
---- !u!114 &1150668344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1150668340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8bca2a6867accf4990a399106841cd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1158465513
 GameObject:
   m_ObjectHideFlags: 0
@@ -3280,10 +3267,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatBox: {fileID: 710022778}
-  chatBoxBody: {fileID: 1131743505}
+  chatBoxText: {fileID: 0}
   chatBar: {fileID: 1026362389}
-  chatBarInput: {fileID: 1026362390}
+  chatBarText: {fileID: 0}
   chatShowDurationSeconds: 3
+--- !u!1 &1618044164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1618044166}
+  - component: {fileID: 1618044165}
+  m_Layer: 0
+  m_Name: World Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1618044165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618044164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8bca2a6867accf4990a399106841cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1618044166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618044164}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1711606814
 GameObject:
   m_ObjectHideFlags: 0
@@ -3917,8 +3948,9 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1150668341}
+  - {fileID: 1618044166}
   - {fileID: 993775125}
+  - {fileID: 1150668341}
   - {fileID: 122112528}
   - {fileID: 938827006}
   - {fileID: 1815177637}
