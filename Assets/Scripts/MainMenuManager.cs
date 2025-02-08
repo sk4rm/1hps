@@ -28,12 +28,14 @@ public class MainMenuManager : MonoBehaviour
     private void OnEnable()
     {
         hostButton.onClick.AddListener(GameManager.Instance.StartHost);
+        joinButton.onClick.AddListener(GameManager.Instance.StartClient);
         exitButton.onClick.AddListener(GameManager.Instance.QuitGame);
     }
 
     private void OnDisable()
     {
         hostButton.onClick.RemoveListener(GameManager.Instance.StartHost);
+        joinButton.onClick.RemoveListener(GameManager.Instance.StartClient);
         exitButton.onClick.RemoveListener(GameManager.Instance.QuitGame);
     }
 }

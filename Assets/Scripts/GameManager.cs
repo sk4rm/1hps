@@ -34,6 +34,11 @@ public class GameManager : MonoBehaviour
         NetworkManager.Singleton.SceneManager.LoadScene("Overworld", LoadSceneMode.Single);
     }
 
+    public void StartClient()
+    {
+        NetworkManager.Singleton.StartClient();
+    }
+
     public void QuitGame()
     {
         Application.Quit();
