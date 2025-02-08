@@ -7,17 +7,18 @@ public class UIManager : MonoBehaviour
 {
     public delegate void OnMessageSubmittedDelegate(string message);
 
+    [Header("Chat UI")]
     [SerializeField] private RectTransform chatBox;
-    [SerializeField] private TextMeshProUGUI chatBoxBody;
+    [SerializeField] private TextMeshProUGUI chatBoxText;
     [SerializeField] private RectTransform chatBar;
-    [SerializeField] private TMP_InputField chatBarInput;
+    [SerializeField] private TMP_InputField chatBarText;
     [SerializeField] private float chatShowDurationSeconds = 3;
     private float _hideChatTimer;
     private bool _pauseHideChatTimer;
 
     private void Awake()
     {
-        chatBarInput.onFocusSelectAll = true;
+        chatBarText.onFocusSelectAll = true;
     }
 
     private void Update()
@@ -50,7 +51,7 @@ public class UIManager : MonoBehaviour
         chatBox.gameObject.SetActive(true);
         chatBar.gameObject.SetActive(true);
         _pauseHideChatTimer = true;
-        chatBarInput.Select();
+        chatBarText.Select();
     }
 
     private void FlashChatBox(float durationSeconds)
@@ -62,11 +63,11 @@ public class UIManager : MonoBehaviour
 
     private void Submit(InputAction.CallbackContext ctx)
     {
-        if (chatBarInput.isFocused)
+        if (chatBarText.isFocused)
         {
-            OnChatBarSubmit?.Invoke(chatBarInput.text);
-            chatBarInput.text = "";
-            chatBarInput.Select();
+            OnChatBarSubmit?.Invoke(chatBarText.text);
+            chatBarText.text = "";
+            chatBarText.Select();
         }
     }
 
@@ -81,7 +82,7 @@ public class UIManager : MonoBehaviour
 
     private void OnChatMessageReceived(string message)
     {
-        chatBoxBody.text += message;
+        chatBoxText.text += message;
         FlashChatBox(chatShowDurationSeconds);
     }
 
