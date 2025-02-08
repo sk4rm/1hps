@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
 
     private void OpenChatBox(InputAction.CallbackContext ctx)
     {
+        PlayerControls.Instance.Actions.Player.Disable();
         chatBox.gameObject.SetActive(true);
         chatBar.gameObject.SetActive(true);
         _pauseHideChatTimer = true;
@@ -75,6 +76,7 @@ public class UIManager : MonoBehaviour
     {
         if (chatBar.gameObject.activeSelf)
         {
+            PlayerControls.Instance.Actions.Player.Enable();
             chatBar.gameObject.SetActive(false);
             FlashChatBox(chatShowDurationSeconds);
         }
