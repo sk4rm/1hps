@@ -9,7 +9,7 @@ public class PlayerSpawner : NetworkBehaviour
     
     public override void OnNetworkSpawn()
     {
-        Debug.Log($"IsOwner: {IsOwner}, IsHost: {IsHost}, IsClient: {IsClient}, IsServer: {IsServer}");
+        // Debug.Log($"IsOwner: {IsOwner}, IsHost: {IsHost}, IsClient: {IsClient}, IsServer: {IsServer}");
         
         SpawnPlayer();
     }

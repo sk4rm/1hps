@@ -1,4 +1,3 @@
-using System;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,14 +8,11 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private new Camera camera;
     [SerializeField] private float speed;
     [SerializeField] private float jumpSpeed;
-    private InputSystem_Actions _playerActions;
 
     private void Awake()
     {
         if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
         if (camera == null) camera = Camera.main;
-
-        _playerActions = new InputSystem_Actions();
     }
 
     private void Update()
@@ -28,7 +24,7 @@ public class PlayerMovement : NetworkBehaviour
         forward.Normalize();
         right.Normalize();
 
-        var axis = _playerActions.Player.Move.ReadValue<Vector2>();
+        var axis = PlayerControls.instance.ReadMoveAxis();
         var direction = forward * axis.y + right * axis.x;
 
         Move(direction);
@@ -36,16 +32,12 @@ public class PlayerMovement : NetworkBehaviour
 
     private void OnEnable()
     {
-        _playerActions.Enable();
-
-        _playerActions.Player.Jump.performed += Jump;
+        PlayerControls.instance.OnJump += Jump;
     }
 
     private void OnDisable()
     {
-        _playerActions.Disable();
-
-        _playerActions.Player.Jump.performed -= Jump;
+        PlayerControls.instance.OnJump -= Jump;
     }
 
     private void Move(Vector3 direction)
@@ -55,7 +47,7 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     [Rpc(SendTo.Server)]
-    private void MoveRpc(Vector3 direction, RpcParams rpcParams = default)
+    private void MoveRpc(Vector3 direction)
     {
         // Debug.Log($"MoveRpc invoked on network object #{NetworkObjectId} by {rpcParams.Receive.SenderClientId}");
         
@@ -74,7 +66,7 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     [Rpc(SendTo.Server)]
-    private void JumpRpc(RpcParams rpcParams = default)
+    private void JumpRpc()
     {
         var velocity = rigidbody.linearVelocity;
         velocity.y = jumpSpeed;
