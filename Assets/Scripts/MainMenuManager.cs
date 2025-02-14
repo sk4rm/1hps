@@ -8,22 +8,6 @@ public class MainMenuManager : MonoBehaviour
     public Button joinButton;
     public Button settingsButton;
     public Button exitButton;
-    public static MainMenuManager Instance { get; private set; }
-
-    private void Awake()
-    {
-        #region Singleton
-
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-
-        #endregion
-    }
 
     private void OnEnable()
     {
