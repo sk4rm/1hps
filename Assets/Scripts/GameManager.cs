@@ -39,6 +39,11 @@ public class GameManager : MonoBehaviour
         NetworkManager.Singleton.StartClient();
     }
 
+    public void LeaveSession()
+    {
+        NetworkManager.Singleton.Shutdown();
+    }
+
     public void QuitGame()
     {
         Application.Quit();

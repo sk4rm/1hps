@@ -1,20 +1,30 @@
 using System;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public delegate void OnMessageSubmittedDelegate(string message);
 
-    [Header("Chat UI")] [SerializeField] private RectTransform chatBox;
-
+    [Header("Chat UI")]
+    
+    [SerializeField] private RectTransform chatBox;
     [SerializeField] private TextMeshProUGUI chatBoxText;
     [SerializeField] private RectTransform chatBar;
     [SerializeField] private TMP_InputField chatBarText;
     [SerializeField] private float chatShowDurationSeconds = 3;
     private float _hideChatTimer;
     private bool _pauseHideChatTimer;
+
+    [Header("Pause Menu")]
+    
+    [SerializeField] private RectTransform pauseMenu;
+    [SerializeField] private CinemachineInputAxisController cinemachineInputAxisController;
+    [SerializeField] private Button exitButton;
 
     private void Awake()
     {
@@ -36,6 +46,7 @@ public class UIManager : MonoBehaviour
         PlayerControls.Instance.Actions.UI.Submit.performed += Submit;
         PlayerControls.Instance.Actions.UI.Cancel.performed += Cancel;
         NetworkChatSystem.OnReceive += OnChatMessageReceived;
+        exitButton.onClick.AddListener(ExitSession);
     }
 
     private void OnDisable()
@@ -44,6 +55,7 @@ public class UIManager : MonoBehaviour
         PlayerControls.Instance.Actions.UI.Submit.performed -= Submit;
         PlayerControls.Instance.Actions.UI.Cancel.performed -= Cancel;
         NetworkChatSystem.OnReceive -= OnChatMessageReceived;
+        exitButton.onClick.RemoveListener(ExitSession);
     }
 
     private void OpenChatBox(InputAction.CallbackContext ctx)
@@ -80,12 +92,32 @@ public class UIManager : MonoBehaviour
             chatBar.gameObject.SetActive(false);
             FlashChatBox(chatShowDurationSeconds);
         }
+        else if (pauseMenu.gameObject.activeSelf)
+        {
+            PlayerControls.Instance.Actions.Player.Enable();
+            cinemachineInputAxisController.enabled = true;
+            pauseMenu.gameObject.SetActive(false);
+        }
+        else
+        {
+            PlayerControls.Instance.Actions.Player.Disable();
+            cinemachineInputAxisController.enabled = false;
+            chatBar.gameObject.SetActive(false);
+            pauseMenu.gameObject.SetActive(true);
+        }
     }
 
     private void OnChatMessageReceived(string message)
     {
         chatBoxText.text += message;
         FlashChatBox(chatShowDurationSeconds);
+    }
+
+    private void ExitSession()
+    {
+        GameManager.Instance.LeaveSession();
+        PlayerControls.Instance.Actions.Player.Enable();
+        SceneManager.LoadScene("MainMenu");
     }
 
     public static event OnMessageSubmittedDelegate OnChatBarSubmit;
