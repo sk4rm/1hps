@@ -1,6 +1,9 @@
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
+using Unity.Networking.Transport.Error;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using WebSocketSharp;
 
 [RequireComponent(typeof(NetworkManager))]
 public class GameManager : MonoBehaviour
@@ -42,6 +45,7 @@ public class GameManager : MonoBehaviour
     public void LeaveSession()
     {
         NetworkManager.Singleton.Shutdown();
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void QuitGame()
