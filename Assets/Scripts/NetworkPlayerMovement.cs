@@ -43,14 +43,7 @@ public class NetworkPlayerMovement : NetworkBehaviour
     private void Move(Vector3 direction)
     {
         if (!IsOwner) return;
-        MoveRpc(direction);
-    }
-
-    [Rpc(SendTo.Server)]
-    private void MoveRpc(Vector3 direction)
-    {
-        // Debug.Log($"MoveRpc invoked on network object #{NetworkObjectId} by {rpcParams.Receive.SenderClientId}");
-
+        
         var velocity = new Vector3(0, rigidbody.linearVelocity.y, 0)
         {
             x = direction.x * speed,
@@ -62,12 +55,7 @@ public class NetworkPlayerMovement : NetworkBehaviour
     private void Jump(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
-        JumpRpc();
-    }
-
-    [Rpc(SendTo.Server)]
-    private void JumpRpc()
-    {
+        
         var velocity = rigidbody.linearVelocity;
         velocity.y = jumpSpeed;
         rigidbody.linearVelocity = velocity;
