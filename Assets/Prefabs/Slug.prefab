@@ -53,7 +53,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7421936, y: 0.37804508, z: 0.4871676}
+  m_Size: {x: 0.47196913, y: 0.37804508, z: 0.7342746}
   m_Center: {x: 0, y: 0.19674087, z: 0}
 --- !u!54 &3468695452613825775
 Rigidbody:
@@ -104,7 +104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1160510b2e5813b4f980a64f8ded147b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1160510b2e5813b4f980a64f8ded147b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -112,11 +112,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1160510b2e5813b4f980a64f8ded147b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1160510b2e5813b4f980a64f8ded147b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1160510b2e5813b4f980a64f8ded147b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -124,7 +124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1160510b2e5813b4f980a64f8ded147b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1160510b2e5813b4f980a64f8ded147b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
