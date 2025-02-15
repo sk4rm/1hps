@@ -20,6 +20,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private TMP_InputField ipInputField;
     [SerializeField] private TMP_InputField portInputField;
     [SerializeField] private Button joinMenuSubmitButton;
+    [SerializeField] private TMP_Text errorText;
 
     private bool _isConnecting;
 
@@ -49,7 +50,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void OnConnectionFailed(ulong _)
     {
-        Debug.Log("Failed to connect to the server.");
+        errorText.text = $"Connection timed out!";
     }
 
     private void ShowJoinMenu()
@@ -65,8 +66,19 @@ public class MainMenuManager : MonoBehaviour
     private void SubmitJoinRequest()
     {
         var ok = ushort.TryParse(portInputField.text, out var port);
-        if (!ok) return;
-        
-        GameManager.Instance.StartClient(ipInputField.text, port);
+        if (!ok)
+        {
+            errorText.text = $"Invalid port number!";
+            return;
+        }
+
+        try
+        {
+            GameManager.Instance.StartClient(ipInputField.text, port);
+        }
+        catch (Exception e)
+        {
+            errorText.text = e.Message;
+        }
     }
 }
