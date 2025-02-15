@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
         PlayerControls.Instance.Actions.UI.Submit.performed += Submit;
         PlayerControls.Instance.Actions.UI.Cancel.performed += Cancel;
         NetworkChatSystem.OnReceive += OnChatMessageReceived;
-        exitButton.onClick.AddListener(GameManager.Instance.LeaveSession);
+        exitButton.onClick.AddListener(GameManager.Instance.ExitToMainMenu);
     }
 
     private void OnDisable()
@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
         PlayerControls.Instance.Actions.UI.Submit.performed -= Submit;
         PlayerControls.Instance.Actions.UI.Cancel.performed -= Cancel;
         NetworkChatSystem.OnReceive -= OnChatMessageReceived;
-        exitButton.onClick.RemoveListener(GameManager.Instance.LeaveSession);
+        exitButton.onClick.RemoveListener(GameManager.Instance.ExitToMainMenu);
     }
 
     private void OpenChatBox(InputAction.CallbackContext ctx)

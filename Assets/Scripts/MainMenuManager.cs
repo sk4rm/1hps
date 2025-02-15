@@ -51,11 +51,13 @@ public class MainMenuManager : MonoBehaviour
     private void OnConnectionFailed(ulong _)
     {
         errorText.text = $"Connection timed out!";
+        joinMenuSubmitButton.interactable = true;
     }
 
     private void ShowJoinMenu()
     {
         joinMenu.gameObject.SetActive(true);
+        joinMenuSubmitButton.interactable = true;
     }
 
     private void HideJoinMenu()
@@ -65,16 +67,27 @@ public class MainMenuManager : MonoBehaviour
 
     private void SubmitJoinRequest()
     {
-        var ok = ushort.TryParse(portInputField.text, out var port);
-        if (!ok)
+        errorText.text = "";
+        joinMenuSubmitButton.interactable = false;
+        
+        var ip = ipInputField.text.Trim();
+        if (string.IsNullOrEmpty(ip))
+            ip = "127.0.0.1";
+
+        ushort port = 7777;
+        if (portInputField.text.Trim() != "")
         {
-            errorText.text = $"Invalid port number!";
-            return;
+            var ok = ushort.TryParse(portInputField.text, out port);
+            if (!ok)
+            {
+                errorText.text = $"Invalid port number!";
+                return;
+            }
         }
 
         try
         {
-            GameManager.Instance.StartClient(ipInputField.text, port);
+            GameManager.Instance.StartClient(ip, port);
         }
         catch (Exception e)
         {

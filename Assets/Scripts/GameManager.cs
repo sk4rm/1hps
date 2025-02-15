@@ -39,9 +39,9 @@ public class GameManager : MonoBehaviour
         NetworkManager.Singleton.SceneManager.LoadScene("Overworld", LoadSceneMode.Single);
     }
 
-    public void StartClient(string url = "127.0.0.1", ushort port = 7777)
+    public void StartClient(string hostname = "127.0.0.1", ushort port = 7777)
     {
-        var hostEntry = Dns.GetHostEntry(url);
+        var hostEntry = Dns.GetHostEntry(hostname);
         var ip = hostEntry.AddressList[0].ToString();
         
         // IPv6 loopback doesn't work for some reason.
@@ -51,7 +51,12 @@ public class GameManager : MonoBehaviour
         NetworkManager.Singleton.StartClient();
     }
 
-    public void LeaveSession()
+    public void Disconnect()
+    {
+        NetworkManager.Singleton.Shutdown();
+    }
+
+    public void ExitToMainMenu()
     {
         NetworkManager.Singleton.Shutdown();
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);

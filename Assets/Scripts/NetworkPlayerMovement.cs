@@ -2,6 +2,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody))]
 public class NetworkPlayerMovement : NetworkBehaviour
 {
     [SerializeField] private new Rigidbody rigidbody;
@@ -11,7 +12,7 @@ public class NetworkPlayerMovement : NetworkBehaviour
 
     private void Awake()
     {
-        if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
         if (camera == null) camera = Camera.main;
     }
 
