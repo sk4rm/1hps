@@ -43,7 +43,7 @@ public class NetworkPlayerMovement : NetworkBehaviour
     private void Move(Vector3 direction)
     {
         if (!IsOwner) return;
-        
+
         var velocity = new Vector3(0, rigidbody.linearVelocity.y, 0)
         {
             x = direction.x * speed,
@@ -55,7 +55,7 @@ public class NetworkPlayerMovement : NetworkBehaviour
     private void Jump(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
-        
+
         var velocity = rigidbody.linearVelocity;
         velocity.y = jumpSpeed;
         rigidbody.linearVelocity = velocity;

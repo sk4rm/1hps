@@ -37,8 +37,9 @@ public class GameManager : MonoBehaviour
         NetworkManager.Singleton.SceneManager.LoadScene("Overworld", LoadSceneMode.Single);
     }
 
-    public void StartClient()
+    public void StartClient(string ip = "127.0.0.1", ushort port = 7777)
     {
+        NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(ip, port);
         NetworkManager.Singleton.StartClient();
     }
 
