@@ -1,11 +1,8 @@
-using System;
 using System.Net;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
-using Unity.Networking.Transport.Error;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using WebSocketSharp;
 
 [RequireComponent(typeof(NetworkManager))]
 public class GameManager : MonoBehaviour
@@ -43,17 +40,12 @@ public class GameManager : MonoBehaviour
     {
         var hostEntry = Dns.GetHostEntry(hostname);
         var ip = hostEntry.AddressList[0].ToString();
-        
+
         // IPv6 loopback doesn't work for some reason.
         if (ip == "::1") ip = "127.0.0.1";
-        
+
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(ip, port);
         NetworkManager.Singleton.StartClient();
-    }
-
-    public void Disconnect()
-    {
-        NetworkManager.Singleton.Shutdown();
     }
 
     public void ExitToMainMenu()

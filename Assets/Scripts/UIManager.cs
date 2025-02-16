@@ -3,7 +3,6 @@ using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -13,102 +12,149 @@ public class UIManager : MonoBehaviour
     [Header("Chat UI")] [SerializeField] private RectTransform chatBox;
     [SerializeField] private TextMeshProUGUI chatBoxText;
     [SerializeField] private RectTransform chatBar;
-    [SerializeField] private TMP_InputField chatBarText;
+    [SerializeField] private TMP_InputField chatBarInputField;
     [SerializeField] private float chatShowDurationSeconds = 3;
-    private float _hideChatTimer;
-    private bool _pauseHideChatTimer;
 
     [Header("Pause Menu")] [SerializeField]
     private RectTransform pauseMenu;
 
     [SerializeField] private CinemachineInputAxisController cinemachineInputAxisController;
     [SerializeField] private Button exitButton;
+    private float _chatBoxTimer;
+    [Obsolete] private bool _pauseHideChatTimer;
+
+    private bool IsChatOpen => chatBox.gameObject.activeSelf && chatBar.gameObject.activeSelf;
 
     private void Awake()
     {
-        chatBarText.onFocusSelectAll = true;
+        chatBarInputField.onFocusSelectAll = true;
+        EnablePlayerControls();
+
+        if (cinemachineInputAxisController == null)
+            cinemachineInputAxisController = Camera.main!.GetComponent<CinemachineInputAxisController>();
     }
 
     private void Update()
     {
-        if (!_pauseHideChatTimer)
+        if (!chatBar.gameObject.activeSelf)
         {
-            _hideChatTimer = Math.Max(0, _hideChatTimer - Time.deltaTime);
-            if (_hideChatTimer <= 0) chatBox.gameObject.SetActive(false);
+            _chatBoxTimer = Math.Max(0, _chatBoxTimer - Time.deltaTime);
+            if (_chatBoxTimer <= 0) chatBox.gameObject.SetActive(false);
         }
     }
 
     private void OnEnable()
     {
-        PlayerControls.Instance.Actions.UI.OpenChat.performed += OpenChatBox;
-        PlayerControls.Instance.Actions.UI.Submit.performed += Submit;
-        PlayerControls.Instance.Actions.UI.Cancel.performed += Cancel;
+        PlayerControls.Instance.Actions.UI.OpenChat.performed += OnOpenChat;
+        PlayerControls.Instance.Actions.UI.Submit.performed += OnSubmit;
+        PlayerControls.Instance.Actions.UI.Cancel.performed += OnCancel;
         NetworkChatSystem.OnReceive += OnChatMessageReceived;
         exitButton.onClick.AddListener(GameManager.Instance.ExitToMainMenu);
     }
 
     private void OnDisable()
     {
-        PlayerControls.Instance.Actions.UI.OpenChat.performed -= OpenChatBox;
-        PlayerControls.Instance.Actions.UI.Submit.performed -= Submit;
-        PlayerControls.Instance.Actions.UI.Cancel.performed -= Cancel;
+        PlayerControls.Instance.Actions.UI.OpenChat.performed -= OnOpenChat;
+        PlayerControls.Instance.Actions.UI.Submit.performed -= OnSubmit;
+        PlayerControls.Instance.Actions.UI.Cancel.performed -= OnCancel;
         NetworkChatSystem.OnReceive -= OnChatMessageReceived;
         exitButton.onClick.RemoveListener(GameManager.Instance.ExitToMainMenu);
     }
 
-    private void OpenChatBox(InputAction.CallbackContext ctx)
+    private void OnOpenChat(InputAction.CallbackContext ctx)
+    {
+        if (IsChatOpen) return;
+
+        chatBox.gameObject.SetActive(true);
+        ResetChatBoxTimer();
+
+        OpenChatBar();
+    }
+
+    private void OpenChatBar()
+    {
+        chatBar.gameObject.SetActive(true);
+        chatBarInputField.Select();
+
+        DisablePlayerControls();
+    }
+
+    private void EnablePlayerControls()
+    {
+        PlayerControls.Instance.Actions.Player.Enable();
+        cinemachineInputAxisController.enabled = true;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void DisablePlayerControls()
     {
         PlayerControls.Instance.Actions.Player.Disable();
-        chatBox.gameObject.SetActive(true);
-        chatBar.gameObject.SetActive(true);
-        _pauseHideChatTimer = true;
-        chatBarText.Select();
+        cinemachineInputAxisController.enabled = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
-    private void FlashChatBox(float durationSeconds)
+    private void CloseChatBar()
     {
-        chatBox.gameObject.SetActive(true);
-        _hideChatTimer = durationSeconds;
-        _pauseHideChatTimer = false;
+        chatBar.gameObject.SetActive(false);
+
+        EnablePlayerControls();
     }
 
-    private void Submit(InputAction.CallbackContext ctx)
+    private void ResetChatBoxTimer()
     {
-        if (chatBarText.isFocused)
+        _chatBoxTimer = chatShowDurationSeconds;
+    }
+
+    private void OnSubmit(InputAction.CallbackContext ctx)
+    {
+        if (chatBarInputField.isFocused)
         {
-            OnChatBarSubmit?.Invoke(chatBarText.text);
-            chatBarText.text = "";
-            chatBarText.Select();
+            if (string.IsNullOrWhiteSpace(chatBarInputField.text)) return;
+
+            OnChatBarSubmit?.Invoke(chatBarInputField.text);
+            chatBarInputField.text = "";
         }
     }
 
-    private void Cancel(InputAction.CallbackContext ctx)
+    private void OpenPauseMenu()
     {
+        pauseMenu.gameObject.SetActive(true);
+
+        DisablePlayerControls();
+    }
+
+    private void ClosePauseMenu()
+    {
+        pauseMenu.gameObject.SetActive(false);
+
+        EnablePlayerControls();
+    }
+
+    private void OnCancel(InputAction.CallbackContext ctx)
+    {
+        if (pauseMenu.gameObject.activeSelf)
+        {
+            ClosePauseMenu();
+            return;
+        }
+
         if (chatBar.gameObject.activeSelf)
         {
-            PlayerControls.Instance.Actions.Player.Enable();
-            chatBar.gameObject.SetActive(false);
-            FlashChatBox(chatShowDurationSeconds);
+            CloseChatBar();
+            return;
         }
-        else if (pauseMenu.gameObject.activeSelf)
-        {
-            PlayerControls.Instance.Actions.Player.Enable();
-            cinemachineInputAxisController.enabled = true;
-            pauseMenu.gameObject.SetActive(false);
-        }
-        else
-        {
-            PlayerControls.Instance.Actions.Player.Disable();
-            cinemachineInputAxisController.enabled = false;
-            chatBar.gameObject.SetActive(false);
-            pauseMenu.gameObject.SetActive(true);
-        }
+
+        OpenPauseMenu();
     }
 
     private void OnChatMessageReceived(string message)
     {
         chatBoxText.text += message;
-        FlashChatBox(chatShowDurationSeconds);
+
+        chatBox.gameObject.SetActive(true);
+        ResetChatBoxTimer();
     }
 
     public static event OnMessageSubmittedDelegate OnChatBarSubmit;

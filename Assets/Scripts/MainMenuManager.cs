@@ -6,16 +6,16 @@ using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [Header("Main Menu Interface")]
-    
-    [SerializeField] private Button hostButton;
+    [Header("Main Menu Interface")] [SerializeField]
+    private Button hostButton;
+
     [SerializeField] private Button joinButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button exitButton;
-    
-    [Header("Join Menu Interface")]
-    
-    [SerializeField] private RectTransform joinMenu;
+
+    [Header("Join Menu Interface")] [SerializeField]
+    private RectTransform joinMenu;
+
     [SerializeField] private Button backToMainMenuButton;
     [SerializeField] private TMP_InputField ipInputField;
     [SerializeField] private TMP_InputField portInputField;
@@ -29,7 +29,7 @@ public class MainMenuManager : MonoBehaviour
         hostButton.onClick.AddListener(GameManager.Instance.StartHost);
         joinButton.onClick.AddListener(ShowJoinMenu);
         exitButton.onClick.AddListener(GameManager.Instance.QuitGame);
-        
+
         backToMainMenuButton.onClick.AddListener(HideJoinMenu);
         joinMenuSubmitButton.onClick.AddListener(SubmitJoinRequest);
 
@@ -44,13 +44,13 @@ public class MainMenuManager : MonoBehaviour
 
         backToMainMenuButton.onClick.RemoveListener(HideJoinMenu);
         joinMenuSubmitButton.onClick.RemoveListener(SubmitJoinRequest);
-        
+
         NetworkManager.Singleton.OnClientDisconnectCallback -= OnConnectionFailed;
     }
 
     private void OnConnectionFailed(ulong _)
     {
-        errorText.text = $"Connection timed out!";
+        errorText.text = "Connection timed out!";
         joinMenuSubmitButton.interactable = true;
     }
 
@@ -69,7 +69,7 @@ public class MainMenuManager : MonoBehaviour
     {
         errorText.text = "";
         joinMenuSubmitButton.interactable = false;
-        
+
         var ip = ipInputField.text.Trim();
         if (string.IsNullOrEmpty(ip))
             ip = "127.0.0.1";
@@ -80,7 +80,7 @@ public class MainMenuManager : MonoBehaviour
             var ok = ushort.TryParse(portInputField.text, out port);
             if (!ok)
             {
-                errorText.text = $"Invalid port number!";
+                errorText.text = "Invalid port number!";
                 return;
             }
         }

@@ -505,7 +505,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   rigidbody: {fileID: 4190348843952322456}
   camera: {fileID: 0}
-  speed: 20
+  speed: 10
   jumpSpeed: 10
 --- !u!114 &-5032901327320759752
 MonoBehaviour:
