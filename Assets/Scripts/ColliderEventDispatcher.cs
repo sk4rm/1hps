@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class ColliderEventDispatcher : MonoBehaviour
@@ -6,14 +5,6 @@ public class ColliderEventDispatcher : MonoBehaviour
     public delegate void OnCollisionDelegate(Collision other);
 
     public delegate void OnTriggerDelegate(Collider other);
-
-    public event OnCollisionDelegate OnCollisionEntered;
-    public event OnCollisionDelegate OnCollisionExited;
-    public event OnCollisionDelegate OnCollisionStayed;
-
-    public event OnTriggerDelegate OnTriggerEntered;
-    public event OnTriggerDelegate OnTriggerExited;
-    public event OnTriggerDelegate OnTriggerStayed;
 
     private void OnCollisionEnter(Collision other)
     {
@@ -44,4 +35,12 @@ public class ColliderEventDispatcher : MonoBehaviour
     {
         OnTriggerStayed?.Invoke(other);
     }
+
+    public event OnCollisionDelegate OnCollisionEntered;
+    public event OnCollisionDelegate OnCollisionExited;
+    public event OnCollisionDelegate OnCollisionStayed;
+
+    public event OnTriggerDelegate OnTriggerEntered;
+    public event OnTriggerDelegate OnTriggerExited;
+    public event OnTriggerDelegate OnTriggerStayed;
 }

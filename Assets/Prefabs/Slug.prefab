@@ -177,9 +177,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43b2acfd4a800c4eb7af0c46201af62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  averageSize: 1
+  sizeVariance: 50
   currentState: 0
   maxChaseRegion: {fileID: 953807019569916655}
   chaseTarget: {fileID: 0}
+  lookDamping: 5
 --- !u!1 &6875527592894541113
 GameObject:
   m_ObjectHideFlags: 0

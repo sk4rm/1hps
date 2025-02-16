@@ -3,16 +3,29 @@ using UnityEngine;
 
 public class SlugAI : MonoBehaviour
 {
-    [SerializeField] private State currentState = State.Idle;
+    [Header("State Machine")] [SerializeField]
+    private State currentState = State.Idle;
+
     [SerializeField] private ColliderEventDispatcher maxChaseRegion;
 
-    [Header("Chasing Options")] [SerializeField]
+    [Header("Chasing-specific Options")] [SerializeField]
     private GameObject chaseTarget;
 
-    private enum State
+    [SerializeField] private float lookDamping = 5f;
+
+    private void Update()
     {
-        Idle,
-        Chasing
+        switch (currentState)
+        {
+            case State.Idle:
+                UpdateIdle();
+                break;
+            case State.Chasing:
+                UpdateChasing();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException($"unreachable state: {currentState}");
+        }
     }
 
     private void OnEnable()
@@ -54,31 +67,26 @@ public class SlugAI : MonoBehaviour
         chaseTarget = null;
     }
 
-    private void Update()
-    {
-        switch (currentState)
-        {
-            case State.Idle:
-                UpdateIdle();
-                break;
-            case State.Chasing:
-                UpdateChasing();
-                break;
-            default:
-                throw new ArgumentOutOfRangeException($"unreachable state: {currentState}");
-        }
-    }
-
     private void UpdateIdle()
     {
     }
 
     private void UpdateChasing()
     {
-        transform.LookAt(chaseTarget.transform);
-        var lookAngles = transform.eulerAngles;
+        LookAt(chaseTarget.transform);
+    }
+
+    private void LookAt(Transform target)
+    {
+        var lookAngles = Quaternion.LookRotation(target.position - transform.position);
         lookAngles.x = 0;
         lookAngles.z = 0;
-        transform.eulerAngles = lookAngles;
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookAngles, Time.deltaTime * lookDamping);
+    }
+
+    private enum State
+    {
+        Idle,
+        Chasing
     }
 }
