@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6314685380688318207}
   - component: {fileID: 3467905424389226764}
   - component: {fileID: 3134031475183926599}
+  - component: {fileID: 7350842240641251503}
   m_Layer: 0
   m_Name: Slug
   m_TagString: Untagged
@@ -163,6 +164,18 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!114 &7350842240641251503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312673258954609888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43b2acfd4a800c4eb7af0c46201af62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2238522271811848435
 PrefabInstance:
   m_ObjectHideFlags: 0
