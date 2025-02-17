@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 541384836558104218}
   - component: {fileID: 6079710980091123556}
-  - component: {fileID: 3468695452613825775}
+  - component: {fileID: -2885153998361950502}
   - component: {fileID: 6314685380688318207}
   - component: {fileID: 3467905424389226764}
-  - component: {fileID: 3134031475183926599}
+  - component: {fileID: -16578763472705239}
   - component: {fileID: 7350842240641251503}
   m_Layer: 0
   m_Name: Slug
@@ -60,7 +60,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.47196913, y: 0.37804508, z: 0.7342746}
   m_Center: {x: 0, y: 0.19674087, z: 0}
---- !u!54 &3468695452613825775
+--- !u!54 &-2885153998361950502
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,7 +83,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &3134031475183926599
+--- !u!114 &-16578763472705239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,8 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43b2acfd4a800c4eb7af0c46201af62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  averageSize: 1
-  sizeVariance: 50
+  rigidbody: {fileID: -2885153998361950502}
   currentState: 0
   maxChaseRegion: {fileID: 953807019569916655}
   chaseTarget: {fileID: 0}
