@@ -20,7 +20,6 @@ public class SlugAI : MonoBehaviour
         switch (currentState)
         {
             case State.Idle:
-                UpdateIdle();
                 break;
             case State.Chasing:
                 UpdateChasing();
@@ -68,10 +67,6 @@ public class SlugAI : MonoBehaviour
     {
         currentState = State.Idle;
         chaseTarget = null;
-    }
-
-    private void UpdateIdle()
-    {
     }
 
     private void UpdateChasing()
