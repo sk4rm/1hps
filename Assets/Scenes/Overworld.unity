@@ -2919,7 +2919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3312673258954609888, guid: 1f7f168f4c1cfbe4082e529c85b8c8ba, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6314685380688318207, guid: 1f7f168f4c1cfbe4082e529c85b8c8ba, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -3789,7 +3789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3312673258954609888, guid: 1f7f168f4c1cfbe4082e529c85b8c8ba, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6314685380688318207, guid: 1f7f168f4c1cfbe4082e529c85b8c8ba, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -4065,7 +4065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3312673258954609888, guid: 1f7f168f4c1cfbe4082e529c85b8c8ba, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6314685380688318207, guid: 1f7f168f4c1cfbe4082e529c85b8c8ba, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -4203,7 +4203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3312673258954609888, guid: 1f7f168f4c1cfbe4082e529c85b8c8ba, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6314685380688318207, guid: 1f7f168f4c1cfbe4082e529c85b8c8ba, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -4853,7 +4853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3312673258954609888, guid: 1f7f168f4c1cfbe4082e529c85b8c8ba, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6314685380688318207, guid: 1f7f168f4c1cfbe4082e529c85b8c8ba, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -5178,7 +5178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3312673258954609888, guid: 1f7f168f4c1cfbe4082e529c85b8c8ba, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6314685380688318207, guid: 1f7f168f4c1cfbe4082e529c85b8c8ba, type: 3}
       propertyPath: GlobalObjectIdHash

@@ -53,6 +53,7 @@ public class SlugAI : MonoBehaviour
     private void ConsiderStopChasing(Collider other)
     {
         if (currentState != State.Chasing) return;
+        if (other.gameObject != chaseTarget) return;
 
         StopChasing();
     }
