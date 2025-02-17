@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
+    
     private void Awake()
     {
         #region Singleton
@@ -26,6 +26,21 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
+    {
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+
+    private void OnEnable()
+    {
+        NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnect;
+    }
+
+    private void OnDisable()
+    {
+        NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnect;
+    }
+
+    private void OnClientDisconnect(ulong _)
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
@@ -51,7 +66,6 @@ public class GameManager : MonoBehaviour
     public void ExitToMainMenu()
     {
         NetworkManager.Singleton.Shutdown();
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void QuitGame()
