@@ -47,7 +47,6 @@ public class NetworkPlayerMovement : NetworkBehaviour
     private void OnDisable()
     {
         PlayerControls.Instance.Actions.Player.Jump.performed -= Jump;
-        ;
     }
 
     private void OnCollisionStay(Collision other)
@@ -84,6 +83,8 @@ public class NetworkPlayerMovement : NetworkBehaviour
 
     private void Look(Vector3 direction)
     {
+        if (!IsOwner) return;
+        
         var rotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * lookSpeed);
     }
