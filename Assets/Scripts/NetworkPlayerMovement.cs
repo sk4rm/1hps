@@ -10,10 +10,9 @@ public class NetworkPlayerMovement : NetworkBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float lookSpeed = 10f;
-    [SerializeField] private ColliderEventDispatcher groundChecker;
 
+    private bool _isOnGround;
     private Vector3 _lastDirection;
-    private bool _canJump;
 
     private void Awake()
     {
@@ -43,25 +42,22 @@ public class NetworkPlayerMovement : NetworkBehaviour
     private void OnEnable()
     {
         PlayerControls.Instance.Actions.Player.Jump.performed += Jump;
-        groundChecker.OnTriggerEntered += OnGroundCheckerEnter;
-        groundChecker.OnTriggerExited += OnGroundCheckerExit;
     }
 
     private void OnDisable()
     {
         PlayerControls.Instance.Actions.Player.Jump.performed -= Jump;
-        groundChecker.OnTriggerEntered -= OnGroundCheckerEnter;
-        groundChecker.OnTriggerExited -= OnGroundCheckerExit;
+        ;
     }
 
-    private void OnGroundCheckerEnter(Collider other)
+    private void OnCollisionStay(Collision other)
     {
-        _canJump = true;
+        _isOnGround = true;
     }
 
-    private void OnGroundCheckerExit(Collider other)
+    private void OnCollisionExit(Collision other)
     {
-        _canJump = false;
+        _isOnGround = false;
     }
 
     private void Move(Vector3 direction)
@@ -79,10 +75,7 @@ public class NetworkPlayerMovement : NetworkBehaviour
     private void Jump(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
-        if (!_canJump) return;
-        _canJump = false;
-        
-        print("jumped");
+        if (!_isOnGround) return;
 
         var velocity = rigidbody.linearVelocity;
         velocity.y = jumpSpeed;
