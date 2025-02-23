@@ -11,11 +11,6 @@ public class NetworkPlayerSpawner : NetworkBehaviour
     {
         // Debug.Log($"IsOwner: {IsOwner}, IsHost: {IsHost}, IsClient: {IsClient}, IsServer: {IsServer}");
 
-        SpawnNetworkPlayer();
-    }
-
-    private void SpawnNetworkPlayer()
-    {
         SpawnPlayerRpc();
     }
 
@@ -48,6 +43,7 @@ public class NetworkPlayerSpawner : NetworkBehaviour
         }
 
         var cinemachineCamera = FindAnyObjectByType<CinemachineCamera>();
-        cinemachineCamera.Follow = playerNetworkObject.transform;
+        var pivot = playerNetworkObject.transform.Find("Pivot");
+        cinemachineCamera.Follow = pivot.transform;
     }
 }
