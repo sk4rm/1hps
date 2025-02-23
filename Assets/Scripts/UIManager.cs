@@ -83,16 +83,14 @@ public class UIManager : MonoBehaviour
     {
         PlayerControls.Instance.Actions.Player.Enable();
         cinemachineInputAxisController.enabled = true;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        GameManager.Instance.LockCursor();
     }
 
     private void DisablePlayerControls()
     {
         PlayerControls.Instance.Actions.Player.Disable();
         cinemachineInputAxisController.enabled = false;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        GameManager.Instance.UnlockCursor();
     }
 
     private void CloseChatBar()

@@ -3,12 +3,13 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using WebSocketSharp;
 
 [RequireComponent(typeof(NetworkManager))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    
+
     private void Awake()
     {
         #region Singleton
@@ -40,9 +41,10 @@ public class GameManager : MonoBehaviour
         NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnect;
     }
 
-    private void OnClientDisconnect(ulong _)
+    private void OnClientDisconnect(ulong who)
     {
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        if (who != NetworkManager.Singleton.LocalClientId) return;
+        ExitToMainMenu();
     }
 
     public void StartHost()
@@ -66,10 +68,24 @@ public class GameManager : MonoBehaviour
     public void ExitToMainMenu()
     {
         NetworkManager.Singleton.Shutdown();
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        UnlockCursor();
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void LockCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void UnlockCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }
