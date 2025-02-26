@@ -3,7 +3,6 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using WebSocketSharp;
 
 [RequireComponent(typeof(NetworkManager))]
 public class GameManager : MonoBehaviour
