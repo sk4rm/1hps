@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class NetworkPlayerMovement : NetworkBehaviour
+public class NetworkPlayerController : NetworkBehaviour
 {
     [SerializeField] private new Rigidbody rigidbody;
     [SerializeField] private new Camera camera;
@@ -29,10 +29,10 @@ public class NetworkPlayerMovement : NetworkBehaviour
         forward.Normalize();
         right.Normalize();
 
-        var axis = PlayerControls.Instance.Actions.Player.Move.ReadValue<Vector2>();
+        var axis = PlayerInputManager.Instance.Actions.Player.Move.ReadValue<Vector2>();
         var direction = forward * axis.y + right * axis.x;
 
-        if (PlayerControls.Instance.Actions.Player.Move.IsPressed())
+        if (PlayerInputManager.Instance.Actions.Player.Move.IsPressed())
             _lastDirection = direction;
 
         Move(direction);
@@ -41,12 +41,12 @@ public class NetworkPlayerMovement : NetworkBehaviour
 
     private void OnEnable()
     {
-        PlayerControls.Instance.Actions.Player.Jump.performed += Jump;
+        PlayerInputManager.Instance.Actions.Player.Jump.performed += Jump;
     }
 
     private void OnDisable()
     {
-        PlayerControls.Instance.Actions.Player.Jump.performed -= Jump;
+        PlayerInputManager.Instance.Actions.Player.Jump.performed -= Jump;
     }
 
     private void OnCollisionStay(Collision other)

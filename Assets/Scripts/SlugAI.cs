@@ -43,7 +43,7 @@ public class SlugAI : MonoBehaviour
 
     private void ConsiderChase(Collider other)
     {
-        var shouldChase = other.transform.root.gameObject.TryGetComponent<NetworkPlayerMovement>(out _);
+        var shouldChase = other.transform.root.gameObject.TryGetComponent<NetworkPlayerController>(out _);
         if (!shouldChase) return;
 
         StartChasing(other.gameObject);

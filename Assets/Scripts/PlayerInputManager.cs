@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class PlayerControls : MonoBehaviour
+public class PlayerInputManager : MonoBehaviour
 {
     public InputSystem_Actions Actions;
-    public static PlayerControls Instance { get; private set; }
+    public static PlayerInputManager Instance { get; private set; }
 
     private void Awake()
     {

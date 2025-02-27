@@ -45,18 +45,18 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerControls.Instance.Actions.UI.OpenChat.performed += OnOpenChat;
-        PlayerControls.Instance.Actions.UI.Submit.performed += OnSubmit;
-        PlayerControls.Instance.Actions.UI.Cancel.performed += OnCancel;
+        PlayerInputManager.Instance.Actions.UI.OpenChat.performed += OnOpenChat;
+        PlayerInputManager.Instance.Actions.UI.Submit.performed += OnSubmit;
+        PlayerInputManager.Instance.Actions.UI.Cancel.performed += OnCancel;
         NetworkChatSystem.OnReceive += OnChatMessageReceived;
         exitButton.onClick.AddListener(GameManager.Instance.ExitToMainMenu);
     }
 
     private void OnDisable()
     {
-        PlayerControls.Instance.Actions.UI.OpenChat.performed -= OnOpenChat;
-        PlayerControls.Instance.Actions.UI.Submit.performed -= OnSubmit;
-        PlayerControls.Instance.Actions.UI.Cancel.performed -= OnCancel;
+        PlayerInputManager.Instance.Actions.UI.OpenChat.performed -= OnOpenChat;
+        PlayerInputManager.Instance.Actions.UI.Submit.performed -= OnSubmit;
+        PlayerInputManager.Instance.Actions.UI.Cancel.performed -= OnCancel;
         NetworkChatSystem.OnReceive -= OnChatMessageReceived;
         exitButton.onClick.RemoveListener(GameManager.Instance.ExitToMainMenu);
     }
@@ -81,14 +81,14 @@ public class UIManager : MonoBehaviour
 
     private void EnablePlayerControls()
     {
-        PlayerControls.Instance.Actions.Player.Enable();
+        PlayerInputManager.Instance.Actions.Player.Enable();
         cinemachineInputAxisController.enabled = true;
         GameManager.Instance.LockCursor();
     }
 
     private void DisablePlayerControls()
     {
-        PlayerControls.Instance.Actions.Player.Disable();
+        PlayerInputManager.Instance.Actions.Player.Disable();
         cinemachineInputAxisController.enabled = false;
         GameManager.Instance.UnlockCursor();
     }
