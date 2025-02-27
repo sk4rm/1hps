@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody))]
 public class NetworkPlayerController : NetworkBehaviour
@@ -9,7 +10,8 @@ public class NetworkPlayerController : NetworkBehaviour
     [SerializeField] private new Camera camera;
     [SerializeField] private float speed;
     [SerializeField] private float jumpSpeed;
-    [SerializeField] private float lookSpeed = 10f;
+    [SerializeField] private float turnSpeed = 10f;
+    [SerializeField] private float maximumReachDistance = 5f;
 
     private bool _isOnGround;
     private Vector3 _lastDirection;
@@ -42,11 +44,13 @@ public class NetworkPlayerController : NetworkBehaviour
     private void OnEnable()
     {
         PlayerInputManager.Instance.Actions.Player.Jump.performed += Jump;
+        PlayerInputManager.Instance.Actions.Player.Attack.performed += Attack;
     }
 
     private void OnDisable()
     {
         PlayerInputManager.Instance.Actions.Player.Jump.performed -= Jump;
+        PlayerInputManager.Instance.Actions.Player.Attack.performed -= Attack;
     }
 
     private void OnCollisionStay(Collision other)
@@ -84,8 +88,23 @@ public class NetworkPlayerController : NetworkBehaviour
     private void Look(Vector3 direction)
     {
         if (!IsOwner) return;
-        
+
         var rotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * lookSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
+    }
+
+    private void Attack(InputAction.CallbackContext ctx)
+    {
+        if (!IsOwner) return;
+        
+        Physics.Raycast(
+            camera.transform.position, 
+            camera.transform.forward,
+            out RaycastHit hit, 
+            maximumReachDistance
+        );
+        
+        if (hit.collider == null) return;
+        Debug.Log($"hit {hit.transform.gameObject.name}");
     }
 }
