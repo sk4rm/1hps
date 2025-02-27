@@ -43,7 +43,7 @@ public class NetworkPlayerSpawner : NetworkBehaviour
         }
 
         var cinemachineCamera = FindAnyObjectByType<CinemachineCamera>();
-        var pivot = playerNetworkObject.transform.Find("Pivot");
-        cinemachineCamera.Follow = pivot.transform;
+        // var pivot = playerNetworkObject.transform.Find("Pivot");
+        cinemachineCamera.Follow = playerNetworkObject.transform;
     }
 }

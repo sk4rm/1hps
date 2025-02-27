@@ -98,7 +98,7 @@ public class NetworkPlayerController : NetworkBehaviour
         if (!IsOwner) return;
         
         Physics.Raycast(
-            camera.transform.position, 
+            transform.position, 
             camera.transform.forward,
             out RaycastHit hit, 
             maximumReachDistance
