@@ -13,7 +13,7 @@ public class NetworkPlayerController : NetworkBehaviour
     [SerializeField] private float maximumReachDistance = 5f;
 
     private bool isOnGround;
-    private Vector3 lastVelocity;
+    private Vector3 lastDirection;
 
     private void Awake()
     {
@@ -32,13 +32,10 @@ public class NetworkPlayerController : NetworkBehaviour
 
         var axis = PlayerInputManager.Instance.Actions.Player.Move.ReadValue<Vector2>();
         var direction = forward * axis.y + right * axis.x;
-
         Move(direction);
-
+        
         if (PlayerInputManager.Instance.Actions.Player.Move.IsPressed())
-            lastVelocity = rigidbody.linearVelocity;
-
-        Look(lastVelocity);
+            Look(lastDirection);
     }
 
     private void OnEnable()
@@ -73,6 +70,8 @@ public class NetworkPlayerController : NetworkBehaviour
             z = direction.z * speed
         };
         rigidbody.linearVelocity = velocity;
+        
+        lastDirection = direction;
     }
 
     private void Jump(InputAction.CallbackContext ctx)
