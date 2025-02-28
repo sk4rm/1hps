@@ -399,9 +399,10 @@ MonoBehaviour:
   rigidbody: {fileID: 4190348843952322456}
   camera: {fileID: 0}
   speed: 10
-  jumpHeight: 1
+  jumpHeight: 0.5
   turnSpeed: 15
-  maximumReachDistance: 5
+  maxAttackRange: 5
+  chopEfficiency: 1
 --- !u!114 &-5032901327320759752
 MonoBehaviour:
   m_ObjectHideFlags: 0

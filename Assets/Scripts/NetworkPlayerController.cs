@@ -5,16 +5,15 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class NetworkPlayerController : NetworkBehaviour
 {
-    [Header("Movement")]
-    [SerializeField] private new Rigidbody rigidbody;
+    [Header("Movement")] [SerializeField] private new Rigidbody rigidbody;
+
     [SerializeField] private new Camera camera;
     [SerializeField] private float speed;
     [SerializeField] private float jumpHeight = 10f;
     [SerializeField] private float turnSpeed = 10f;
     [SerializeField] private float maxAttackRange = 5f;
-    
-    [Header("Chop")]
-    [SerializeField] private float chopEfficiency = 1f;
+
+    [Header("Chop")] [SerializeField] private float chopEfficiency = 1f;
 
     private bool isOnGround;
     private Vector3 lastDirection;
@@ -54,14 +53,14 @@ public class NetworkPlayerController : NetworkBehaviour
         PlayerInputManager.Instance.Actions.Player.Attack.performed -= Attack;
     }
 
-    private void OnCollisionStay()
-    {
-        isOnGround = true;
-    }
-
     private void OnCollisionExit()
     {
         isOnGround = false;
+    }
+
+    private void OnCollisionStay()
+    {
+        isOnGround = true;
     }
 
     private void Move(Vector3 direction)
@@ -109,9 +108,6 @@ public class NetworkPlayerController : NetworkBehaviour
         );
 
         if (hit.collider == null) return;
-        if (hit.collider.gameObject.TryGetComponent<ChoppableObject>(out var choppable))
-        {
-            choppable.Chop(chopEfficiency);
-        }
+        if (hit.collider.gameObject.TryGetComponent<ChoppableObject>(out var choppable)) choppable.Chop(chopEfficiency);
     }
 }

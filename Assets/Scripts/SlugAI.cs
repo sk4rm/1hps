@@ -4,7 +4,7 @@ using UnityEngine;
 public class SlugAI : MonoBehaviour
 {
     [SerializeField] private new Rigidbody rigidbody;
-    
+
     [Header("State Machine")] [SerializeField]
     private State currentState = State.Idle;
 
