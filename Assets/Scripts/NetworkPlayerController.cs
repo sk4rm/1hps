@@ -5,12 +5,16 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class NetworkPlayerController : NetworkBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private new Rigidbody rigidbody;
     [SerializeField] private new Camera camera;
     [SerializeField] private float speed;
-    [SerializeField] private float jumpHeight = 10;
+    [SerializeField] private float jumpHeight = 10f;
     [SerializeField] private float turnSpeed = 10f;
-    [SerializeField] private float maximumReachDistance = 5f;
+    [SerializeField] private float maxAttackRange = 5f;
+    
+    [Header("Chop")]
+    [SerializeField] private float chopEfficiency = 1f;
 
     private bool isOnGround;
     private Vector3 lastDirection;
@@ -33,7 +37,7 @@ public class NetworkPlayerController : NetworkBehaviour
         var axis = PlayerInputManager.Instance.Actions.Player.Move.ReadValue<Vector2>();
         var direction = forward * axis.y + right * axis.x;
         Move(direction);
-        
+
         if (PlayerInputManager.Instance.Actions.Player.Move.IsPressed())
             Look(lastDirection);
     }
@@ -70,7 +74,7 @@ public class NetworkPlayerController : NetworkBehaviour
             z = direction.z * speed
         };
         rigidbody.linearVelocity = velocity;
-        
+
         lastDirection = direction;
     }
 
@@ -100,11 +104,14 @@ public class NetworkPlayerController : NetworkBehaviour
         Physics.Raycast(
             transform.position,
             camera.transform.forward,
-            out RaycastHit hit,
-            maximumReachDistance
+            out var hit,
+            maxAttackRange
         );
 
         if (hit.collider == null) return;
-        Debug.Log($"hit {hit.transform.gameObject.name}");
+        if (hit.collider.gameObject.TryGetComponent<ChoppableObject>(out var choppable))
+        {
+            choppable.Chop(chopEfficiency);
+        }
     }
 }
