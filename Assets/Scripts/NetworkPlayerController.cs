@@ -8,7 +8,7 @@ public class NetworkPlayerController : NetworkBehaviour
     [SerializeField] private new Rigidbody rigidbody;
     [SerializeField] private new Camera camera;
     [SerializeField] private float speed;
-    [SerializeField] private float jumpSpeed;
+    [SerializeField] private float jumpHeight = 10;
     [SerializeField] private float turnSpeed = 10f;
     [SerializeField] private float maximumReachDistance = 5f;
 
@@ -79,6 +79,7 @@ public class NetworkPlayerController : NetworkBehaviour
         if (!IsOwner) return;
         if (!isOnGround) return;
 
+        var jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
         var velocity = rigidbody.linearVelocity;
         velocity.y = jumpSpeed;
         rigidbody.linearVelocity = velocity;
