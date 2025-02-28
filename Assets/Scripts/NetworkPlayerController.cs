@@ -1,7 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody))]
 public class NetworkPlayerController : NetworkBehaviour
@@ -13,8 +12,8 @@ public class NetworkPlayerController : NetworkBehaviour
     [SerializeField] private float turnSpeed = 10f;
     [SerializeField] private float maximumReachDistance = 5f;
 
-    private bool _isOnGround;
-    private Vector3 _lastDirection;
+    private bool isOnGround;
+    private Vector3 lastVelocity;
 
     private void Awake()
     {
@@ -34,11 +33,12 @@ public class NetworkPlayerController : NetworkBehaviour
         var axis = PlayerInputManager.Instance.Actions.Player.Move.ReadValue<Vector2>();
         var direction = forward * axis.y + right * axis.x;
 
-        if (PlayerInputManager.Instance.Actions.Player.Move.IsPressed())
-            _lastDirection = direction;
-
         Move(direction);
-        Look(_lastDirection);
+
+        if (PlayerInputManager.Instance.Actions.Player.Move.IsPressed())
+            lastVelocity = rigidbody.linearVelocity;
+
+        Look(lastVelocity);
     }
 
     private void OnEnable()
@@ -53,14 +53,14 @@ public class NetworkPlayerController : NetworkBehaviour
         PlayerInputManager.Instance.Actions.Player.Attack.performed -= Attack;
     }
 
-    private void OnCollisionStay(Collision other)
+    private void OnCollisionStay()
     {
-        _isOnGround = true;
+        isOnGround = true;
     }
 
-    private void OnCollisionExit(Collision other)
+    private void OnCollisionExit()
     {
-        _isOnGround = false;
+        isOnGround = false;
     }
 
     private void Move(Vector3 direction)
@@ -78,7 +78,7 @@ public class NetworkPlayerController : NetworkBehaviour
     private void Jump(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
-        if (!_isOnGround) return;
+        if (!isOnGround) return;
 
         var velocity = rigidbody.linearVelocity;
         velocity.y = jumpSpeed;
@@ -96,14 +96,14 @@ public class NetworkPlayerController : NetworkBehaviour
     private void Attack(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
-        
+
         Physics.Raycast(
-            transform.position, 
+            transform.position,
             camera.transform.forward,
-            out RaycastHit hit, 
+            out RaycastHit hit,
             maximumReachDistance
         );
-        
+
         if (hit.collider == null) return;
         Debug.Log($"hit {hit.transform.gameObject.name}");
     }
