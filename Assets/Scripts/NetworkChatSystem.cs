@@ -1,11 +1,18 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NetworkChatSystem : NetworkBehaviour
 {
     public delegate void OnReceiveDelegate(string message);
 
-    private const string MessageOfTheDay = "<i>Press ENTER to chat</i>";
+    private string messageOfTheDay;
+
+    private void Awake()
+    {
+        var openChatKey = PlayerInputManager.Instance.Actions.UI.OpenChat.GetBindingDisplayString();
+        messageOfTheDay = $"Press {openChatKey} to chat";
+    }
 
     private void OnEnable()
     {
@@ -19,12 +26,24 @@ public class NetworkChatSystem : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        OnReceive?.Invoke(MessageOfTheDay);
+        OnReceive?.Invoke(messageOfTheDay);
         Debug.Log("Chat system initialized!");
     }
 
     private void SendChat(string message)
     {
+        if (message.StartsWith("/"))
+        {
+            if (TryExecuteSlashCommand(message, out var output))
+            {
+                SendChatRpc(output);
+                return;
+            }
+            
+            OnReceive?.Invoke(output);
+            return;
+        }
+        
         SendChatRpc(message);
     }
 
@@ -34,6 +53,19 @@ public class NetworkChatSystem : NetworkBehaviour
         var senderId = rpcParams.Receive.SenderClientId;
         var entry = $"\nPlayer {senderId}: {message}";
         OnReceive?.Invoke(entry);
+    }
+
+    private bool TryExecuteSlashCommand(string command, out string output)
+    {
+        if (command.StartsWith("/respawntrees"))
+        {
+            ChoppableManager.Instance.RespawnAll();
+            output = $"<i>All trees respawned!</i>";
+            return true;
+        }
+
+        output = "<i>Invalid command</i>";
+        return false;
     }
 
     public static event OnReceiveDelegate OnReceive;

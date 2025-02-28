@@ -41,6 +41,10 @@ public class ChoppableManager : MonoBehaviour
 
     public void RespawnAll()
     {
-        foreach (var choppable in choppableObjects) choppable.transform.root.gameObject.SetActive(true);
+        foreach (var choppable in choppableObjects)
+        {
+            choppable.ResetDurability();
+            choppable.transform.root.gameObject.SetActive(true);
+        }
     }
 }
