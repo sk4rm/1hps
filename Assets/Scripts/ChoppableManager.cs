@@ -5,9 +5,9 @@ public class ChoppableManager : NetworkBehaviour
 {
     public static ChoppableManager Instance;
 
-    private NetworkChoppableObject[] choppableObjects;
+    [SerializeField] private NetworkChoppableObject[] choppableObjects;
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
         #region Singleton
 
@@ -23,22 +23,25 @@ public class ChoppableManager : NetworkBehaviour
         #endregion
 
         choppableObjects = FindObjectsByType<NetworkChoppableObject>(FindObjectsSortMode.None);
+        foreach (var choppable in choppableObjects)
+        {
+            choppable.OnChopFinish += DespawnRpc;
+        }
     }
 
-    private void OnEnable()
+    public override void OnNetworkDespawn()
     {
-        foreach (var choppable in choppableObjects) choppable.OnChopFinish += DespawnRpc;
+        foreach (var choppable in choppableObjects)
+        {
+            choppable.OnChopFinish -= DespawnRpc;
+        }
     }
-
-    private void OnDisable()
+    
+    [Rpc(SendTo.Server)]
+    private void DespawnRpc(NetworkBehaviourReference choppable)
     {
-        foreach (var choppable in choppableObjects) choppable.OnChopFinish -= DespawnRpc;
-    }
-
-    private void DespawnRpc(NetworkChoppableObject choppedObject)
-    {
-        NetworkObject.Despawn(false);
-        choppedObject.transform.root.gameObject.SetActive(false);
+        choppable.TryGet<NetworkChoppableObject>(out var choppedObject);
+        choppedObject.NetworkObject.Despawn(false);
     }
     
     public void RespawnAllRpc()

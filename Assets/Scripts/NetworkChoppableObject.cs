@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class NetworkChoppableObject : NetworkBehaviour
 {
-    public delegate void ChopFinishDelegate(NetworkChoppableObject choppedObject);
+    public delegate void ChopFinishDelegate(NetworkBehaviourReference choppedObject);
 
     public event ChopFinishDelegate OnChopFinish;
 
@@ -18,19 +18,14 @@ public class NetworkChoppableObject : NetworkBehaviour
 
     public override void OnNetworkDespawn()
     {
-        gameObject.SetActive(false);
-        base.OnNetworkDespawn();
+        transform.root.gameObject.SetActive(false);
     }
 
     [Rpc(SendTo.Server)]
     public void ChopRpc(float chopEfficiency)
     {
         chopDurability.Value = Mathf.Max(0, chopDurability.Value - chopEfficiency);
-        if (chopDurability.Value == 0f)
-        {
-            OnChopFinish?.Invoke(this);
-            NetworkObject.Despawn(false);
-        }
+        if (chopDurability.Value == 0f) OnChopFinish?.Invoke(this);
     }
 
     public void ResetDurability()

@@ -402,7 +402,7 @@ MonoBehaviour:
   jumpHeight: 0.5
   turnSpeed: 15
   maxAttackRange: 5
-  chopEfficiency: 1
+  chopEfficiency: 10
 --- !u!114 &-5032901327320759752
 MonoBehaviour:
   m_ObjectHideFlags: 0
