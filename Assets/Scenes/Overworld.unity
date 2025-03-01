@@ -437,6 +437,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4046939781386882527, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2279038886
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046939781386882527, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2642558460
+      objectReference: {fileID: 0}
     - target: {fileID: 6049503583200859577, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -151.36458
@@ -476,6 +484,10 @@ PrefabInstance:
     - target: {fileID: 6049503583200859577, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7862866193963565781, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
+      propertyPath: initialChopDurability
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2158,6 +2170,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4046939781386882527, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2642010085
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046939781386882527, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2642558460
+      objectReference: {fileID: 0}
     - target: {fileID: 6049503583200859577, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -137.35846
@@ -2197,6 +2217,10 @@ PrefabInstance:
     - target: {fileID: 6049503583200859577, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7862866193963565781, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
+      propertyPath: initialChopDurability
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3639,7 +3663,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1209696978}
-  - component: {fileID: 1209696977}
+  - component: {fileID: 1209696979}
+  - component: {fileID: 1209696980}
   m_Layer: 0
   m_Name: Choppable Manager
   m_TagString: Untagged
@@ -3647,18 +3672,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1209696977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1209696976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 820d2efa812b31743ba0d012bf868461, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1209696978
 Transform:
   m_ObjectHideFlags: 0
@@ -3674,6 +3687,44 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1209696979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209696976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3475287554
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &1209696980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209696976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 820d2efa812b31743ba0d012bf868461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &1223095071
 GameObject:
   m_ObjectHideFlags: 0
@@ -3738,6 +3789,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree
       objectReference: {fileID: 0}
+    - target: {fileID: 4046939781386882527, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2172943679
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046939781386882527, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2642558460
+      objectReference: {fileID: 0}
     - target: {fileID: 6049503583200859577, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -140.58333
@@ -3777,6 +3836,10 @@ PrefabInstance:
     - target: {fileID: 6049503583200859577, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7862866193963565781, guid: ff12d442dcb0b774ebdaa65c72ca01c0, type: 3}
+      propertyPath: initialChopDurability
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

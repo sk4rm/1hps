@@ -40,27 +40,25 @@ public class NetworkChatSystem : NetworkBehaviour
                 return;
             }
             
-            OnReceive?.Invoke(output);
+            OnReceive?.Invoke("\n" + output);
             return;
         }
         
-        SendChatRpc(message);
+        SendChatRpc($"Player {NetworkManager.Singleton.LocalClient}: {message}");
     }
 
     [Rpc(SendTo.ClientsAndHost)]
     private void SendChatRpc(string message, RpcParams rpcParams = default)
     {
-        var senderId = rpcParams.Receive.SenderClientId;
-        var entry = $"\nPlayer {senderId}: {message}";
-        OnReceive?.Invoke(entry);
+        OnReceive?.Invoke("\n" + message);
     }
 
     private bool TryExecuteSlashCommand(string command, out string output)
     {
         if (command.StartsWith("/respawntrees"))
         {
-            ChoppableManager.Instance.RespawnAll();
-            output = $"<i>All trees respawned!</i>";
+            ChoppableManager.Instance.RespawnAllRpc();
+            output = $"<i>{NetworkManager.Singleton.LocalClientId} respawned all trees!</i>";
             return true;
         }
 

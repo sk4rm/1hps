@@ -108,6 +108,10 @@ public class NetworkPlayerController : NetworkBehaviour
         );
 
         if (hit.collider == null) return;
-        if (hit.collider.gameObject.TryGetComponent<ChoppableObject>(out var choppable)) choppable.Chop(chopEfficiency);
+        
+        if (hit.collider.gameObject.TryGetComponent<NetworkChoppableObject>(out var choppable))
+        {
+            choppable.ChopRpc(chopEfficiency);
+        }
     }
 }

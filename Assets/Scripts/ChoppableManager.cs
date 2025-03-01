@@ -1,10 +1,11 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class ChoppableManager : MonoBehaviour
+public class ChoppableManager : NetworkBehaviour
 {
     public static ChoppableManager Instance;
 
-    private ChoppableObject[] choppableObjects;
+    private NetworkChoppableObject[] choppableObjects;
 
     private void Awake()
     {
@@ -21,25 +22,26 @@ public class ChoppableManager : MonoBehaviour
 
         #endregion
 
-        choppableObjects = FindObjectsByType<ChoppableObject>(FindObjectsSortMode.None);
+        choppableObjects = FindObjectsByType<NetworkChoppableObject>(FindObjectsSortMode.None);
     }
 
     private void OnEnable()
     {
-        foreach (var choppable in choppableObjects) choppable.OnChopFinish += Despawn;
+        foreach (var choppable in choppableObjects) choppable.OnChopFinish += DespawnRpc;
     }
 
     private void OnDisable()
     {
-        foreach (var choppable in choppableObjects) choppable.OnChopFinish -= Despawn;
+        foreach (var choppable in choppableObjects) choppable.OnChopFinish -= DespawnRpc;
     }
 
-    private void Despawn(ChoppableObject choppedObject)
+    private void DespawnRpc(NetworkChoppableObject choppedObject)
     {
+        NetworkObject.Despawn(false);
         choppedObject.transform.root.gameObject.SetActive(false);
     }
-
-    public void RespawnAll()
+    
+    public void RespawnAllRpc()
     {
         foreach (var choppable in choppableObjects)
         {
