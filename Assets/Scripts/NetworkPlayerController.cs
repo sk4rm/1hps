@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,6 +6,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class NetworkPlayerController : NetworkBehaviour
 {
+    [Header("UI")] [SerializeField] private string playerName;
+    [SerializeField] private TextMeshProUGUI nameTagText;
+
     [Header("Movement")] [SerializeField] private new Rigidbody rigidbody;
 
     [SerializeField] private new Camera camera;
@@ -17,6 +21,11 @@ public class NetworkPlayerController : NetworkBehaviour
 
     private bool isOnGround;
     private Vector3 lastDirection;
+
+    public override void OnNetworkSpawn()
+    {
+        nameTagText.text = playerName;
+    }
 
     private void Awake()
     {
@@ -108,7 +117,7 @@ public class NetworkPlayerController : NetworkBehaviour
         );
 
         if (hit.collider == null) return;
-        
+
         if (hit.collider.gameObject.TryGetComponent<NetworkChoppableObject>(out var choppable))
         {
             choppable.ChopRpc(chopEfficiency);

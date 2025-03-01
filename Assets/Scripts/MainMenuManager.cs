@@ -19,10 +19,11 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Button backToMainMenuButton;
     [SerializeField] private TMP_InputField ipInputField;
     [SerializeField] private TMP_InputField portInputField;
+    [SerializeField] private TMP_InputField nicknameInputField;
     [SerializeField] private Button joinMenuSubmitButton;
     [SerializeField] private TMP_Text errorText;
 
-    private bool _isConnecting;
+    private bool isConnecting;
 
     private void OnEnable()
     {

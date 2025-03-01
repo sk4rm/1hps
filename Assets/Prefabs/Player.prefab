@@ -425,6 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  nameTagText: {fileID: 7081714051733831595}
   rigidbody: {fileID: 4190348843952322456}
   camera: {fileID: 0}
   speed: 10
