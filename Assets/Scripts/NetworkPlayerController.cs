@@ -1,4 +1,3 @@
-using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,11 +5,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class NetworkPlayerController : NetworkBehaviour
 {
-    [Header("UI")] [SerializeField] private string playerName;
-    [SerializeField] private TextMeshProUGUI nameTagText;
-
     [Header("Movement")] [SerializeField] private new Rigidbody rigidbody;
-
     [SerializeField] private new Camera camera;
     [SerializeField] private float speed;
     [SerializeField] private float jumpHeight = 10f;
@@ -21,11 +16,6 @@ public class NetworkPlayerController : NetworkBehaviour
 
     private bool isOnGround;
     private Vector3 lastDirection;
-
-    public override void OnNetworkSpawn()
-    {
-        nameTagText.text = playerName;
-    }
 
     private void Awake()
     {

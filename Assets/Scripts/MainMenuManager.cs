@@ -35,8 +35,9 @@ public class MainMenuManager : MonoBehaviour
         joinMenuSubmitButton.onClick.AddListener(SubmitJoinRequest);
 
         NetworkManager.Singleton.OnClientDisconnectCallback += OnConnectionFailed;
+        NetworkManager.Singleton.OnConnectionEvent += OnConnectionEvent;
     }
-
+    
     private void OnDisable()
     {
         hostButton.onClick.RemoveListener(GameManager.Instance.StartHost);
@@ -47,12 +48,19 @@ public class MainMenuManager : MonoBehaviour
         joinMenuSubmitButton.onClick.RemoveListener(SubmitJoinRequest);
 
         NetworkManager.Singleton.OnClientDisconnectCallback -= OnConnectionFailed;
+        NetworkManager.Singleton.OnConnectionEvent -= OnConnectionEvent;
     }
 
     private void OnConnectionFailed(ulong _)
     {
         errorText.text = "Connection timed out!";
         joinMenuSubmitButton.interactable = true;
+    }
+
+    private void OnConnectionEvent(NetworkManager networkManager, ConnectionEventData connectionEventData)
+    {
+        print($"Event Type: {connectionEventData.EventType}, From: {connectionEventData.ClientId}");
+        // TODO GameManager.Instance.TryAddPlayername(connectionEventData.clientId, nicknameInputField.text);
     }
 
     private void ShowJoinMenu()
@@ -85,7 +93,7 @@ public class MainMenuManager : MonoBehaviour
                 return;
             }
         }
-
+        
         try
         {
             GameManager.Instance.StartClient(ip, port);

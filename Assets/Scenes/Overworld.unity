@@ -4070,6 +4070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  choppableObjects: []
 --- !u!1 &1223095071
 GameObject:
   m_ObjectHideFlags: 0

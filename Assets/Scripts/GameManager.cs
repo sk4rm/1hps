@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -8,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    
+    private readonly Dictionary<ulong, string> playerNames = new();
     
     private void Awake()
     {
@@ -59,7 +62,7 @@ public class GameManager : MonoBehaviour
 
         // IPv6 loopback doesn't work for some reason.
         if (ip == "::1") ip = "127.0.0.1";
-
+        
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(ip, port);
         NetworkManager.Singleton.StartClient();
     }
@@ -86,5 +89,15 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+    }
+    
+    public bool TryGetPlayerName(ulong clientId, out string playerName)
+    {
+        return playerNames.TryGetValue(clientId, out playerName);
+    }
+
+    public bool TryAddPlayerName(ulong clientId, string playerName)
+    {
+        return playerNames.TryAdd(clientId, playerName);
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1336698053910922666}
   - component: {fileID: 7081714051733831595}
   - component: {fileID: 6022428181068839120}
+  - component: {fileID: 5460702316007939415}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -151,6 +152,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &5460702316007939415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474205593317057739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7df64df8adbd9c4fb54f48652bc3ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &3601433506457973511
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +439,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  nameTagText: {fileID: 7081714051733831595}
   rigidbody: {fileID: 4190348843952322456}
   camera: {fileID: 0}
   speed: 10
