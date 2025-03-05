@@ -39,11 +39,11 @@ public class NetworkChatSystem : NetworkBehaviour
                 SendChatRpc(output);
                 return;
             }
-            
+
             OnReceive?.Invoke("\n" + output);
             return;
         }
-        
+
         SendChatRpc($"Player {NetworkManager.Singleton.LocalClient}: {message}");
     }
 

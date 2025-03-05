@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Net;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -8,8 +7,9 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(NetworkManager))]
 public class GameManager : MonoBehaviour
 {
+    public string localPlayerDisplayName = "Host";
     public static GameManager Instance { get; private set; }
-    
+
     private void Awake()
     {
         #region Singleton
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
         // IPv6 loopback doesn't work for some reason.
         if (ip == "::1") ip = "127.0.0.1";
-        
+
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(ip, port);
         NetworkManager.Singleton.StartClient();
     }

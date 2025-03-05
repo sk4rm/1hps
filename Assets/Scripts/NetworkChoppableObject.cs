@@ -5,8 +5,6 @@ public class NetworkChoppableObject : NetworkBehaviour
 {
     public delegate void ChopFinishDelegate(NetworkBehaviourReference choppedObject);
 
-    public event ChopFinishDelegate OnChopFinish;
-
     [SerializeField] private float initialChopDurability = 10f;
 
     private NetworkVariable<float> chopDurability;
@@ -15,6 +13,8 @@ public class NetworkChoppableObject : NetworkBehaviour
     {
         chopDurability = new NetworkVariable<float>(initialChopDurability);
     }
+
+    public event ChopFinishDelegate OnChopFinish;
 
     public override void OnNetworkDespawn()
     {

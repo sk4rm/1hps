@@ -5,24 +5,16 @@ using UnityEngine;
 
 public class NetworkPlayerName : NetworkBehaviour
 {
-    [SerializeField] private string defaultDisplayName = "john lumberjack";
-
-    [SerializeField] private NetworkVariable<FixedString64Bytes> displayName = new(string.Empty,
-        NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-
+    [SerializeField] private NetworkVariable<FixedString64Bytes> displayName = new();
     [SerializeField] private TextMeshProUGUI nameTag;
-
-    public string DisplayName
-    {
-        get => displayName.Value.ToString();
-        set => displayName.Value = new FixedString64Bytes(value);
-    }
 
     public override void OnNetworkSpawn()
     {
         displayName.OnValueChanged += UpdateNameTag;
 
-        displayName.OnValueChanged.Invoke(displayName.Value, defaultDisplayName);
+        if (IsOwner) SetDisplayNameRpc(GameManager.Instance.localPlayerDisplayName);
+
+        UpdateNameTag(displayName.Value, displayName.Value);
     }
 
     public override void OnNetworkDespawn()
@@ -33,5 +25,11 @@ public class NetworkPlayerName : NetworkBehaviour
     private void UpdateNameTag(FixedString64Bytes previousValue, FixedString64Bytes newValue)
     {
         nameTag.text = newValue.ToString();
+    }
+
+    [Rpc(SendTo.Server)]
+    private void SetDisplayNameRpc(string newName)
+    {
+        displayName.Value = new FixedString64Bytes(newName);
     }
 }

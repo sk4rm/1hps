@@ -37,7 +37,7 @@ public class MainMenuManager : MonoBehaviour
         NetworkManager.Singleton.OnClientDisconnectCallback += OnConnectionFailed;
         NetworkManager.Singleton.OnConnectionEvent += OnConnectionEvent;
     }
-    
+
     private void OnDisable()
     {
         hostButton.onClick.RemoveListener(GameManager.Instance.StartHost);
@@ -92,7 +92,9 @@ public class MainMenuManager : MonoBehaviour
                 return;
             }
         }
-        
+
+        GameManager.Instance.localPlayerDisplayName = nicknameInputField.text;
+
         try
         {
             GameManager.Instance.StartClient(ip, port);
