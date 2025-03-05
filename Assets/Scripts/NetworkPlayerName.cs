@@ -24,6 +24,7 @@ public class NetworkPlayerName : NetworkBehaviour
 
     private void UpdateNameTag(FixedString64Bytes previousValue, FixedString64Bytes newValue)
     {
+        if (nameTag == null) return;
         nameTag.text = newValue.ToString();
     }
 
