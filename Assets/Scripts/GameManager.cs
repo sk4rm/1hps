@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     
-    private readonly Dictionary<ulong, string> playerNames = new();
-    
     private void Awake()
     {
         #region Singleton
@@ -89,15 +87,5 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-    }
-    
-    public bool TryGetPlayerName(ulong clientId, out string playerName)
-    {
-        return playerNames.TryGetValue(clientId, out playerName);
-    }
-
-    public bool TryAddPlayerName(ulong clientId, string playerName)
-    {
-        return playerNames.TryAdd(clientId, playerName);
     }
 }

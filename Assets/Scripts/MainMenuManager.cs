@@ -60,7 +60,6 @@ public class MainMenuManager : MonoBehaviour
     private void OnConnectionEvent(NetworkManager networkManager, ConnectionEventData connectionEventData)
     {
         print($"Event Type: {connectionEventData.EventType}, From: {connectionEventData.ClientId}");
-        // TODO GameManager.Instance.TryAddPlayername(connectionEventData.clientId, nicknameInputField.text);
     }
 
     private void ShowJoinMenu()
