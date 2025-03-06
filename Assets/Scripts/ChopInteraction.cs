@@ -1,10 +1,9 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
 public class ChopInteraction : NetworkBehaviour, IInteractable
 {
-    public delegate void ChopFinishDelegate(NetworkBehaviourReference choppedObject);
-
     [SerializeField] private float initialChopDurability = 10f;
 
     private NetworkVariable<float> chopDurability;
@@ -14,7 +13,13 @@ public class ChopInteraction : NetworkBehaviour, IInteractable
         chopDurability = new NetworkVariable<float>(initialChopDurability);
     }
 
-    public event ChopFinishDelegate OnChopFinish;
+    public void Interact()
+    {
+        ChopRpc(1);
+    }
+
+    public event Action<NetworkBehaviourReference> OnChopFinish;
+
 
     public override void OnNetworkDespawn()
     {
@@ -31,10 +36,5 @@ public class ChopInteraction : NetworkBehaviour, IInteractable
     public void ResetDurability()
     {
         chopDurability.Value = initialChopDurability;
-    }
-
-    public void Interact()
-    {
-        ChopRpc(1);
     }
 }

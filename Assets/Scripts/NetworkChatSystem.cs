@@ -1,11 +1,10 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class NetworkChatSystem : NetworkBehaviour
 {
-    public delegate void OnReceiveDelegate(string message);
-
     private string messageOfTheDay;
 
     private void Awake()
@@ -23,6 +22,8 @@ public class NetworkChatSystem : NetworkBehaviour
     {
         UIManager.OnChatBarSubmit -= SendChat;
     }
+
+    public static event Action<string> OnReceive;
 
     public override void OnNetworkSpawn()
     {
@@ -65,6 +66,4 @@ public class NetworkChatSystem : NetworkBehaviour
         output = "<i>Invalid command</i>";
         return false;
     }
-
-    public static event OnReceiveDelegate OnReceive;
 }

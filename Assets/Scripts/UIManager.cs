@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public delegate void OnMessageSubmittedDelegate(string message);
-
     [Header("Chat UI")] [SerializeField] private RectTransform chatBox;
     [SerializeField] private TextMeshProUGUI chatBoxText;
     [SerializeField] private RectTransform chatBar;
@@ -20,8 +18,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private CinemachineInputAxisController cinemachineInputAxisController;
     [SerializeField] private Button exitButton;
-    private float _chatBoxTimer;
-    [Obsolete] private bool _pauseHideChatTimer;
+    private float chatBoxTimer;
+    [Obsolete] private bool pauseHideChatTimer;
 
     private bool IsChatOpen => chatBox.gameObject.activeSelf && chatBar.gameObject.activeSelf;
 
@@ -38,8 +36,8 @@ public class UIManager : MonoBehaviour
     {
         if (!chatBar.gameObject.activeSelf)
         {
-            _chatBoxTimer = Math.Max(0, _chatBoxTimer - Time.deltaTime);
-            if (_chatBoxTimer <= 0) chatBox.gameObject.SetActive(false);
+            chatBoxTimer = Math.Max(0, chatBoxTimer - Time.deltaTime);
+            if (chatBoxTimer <= 0) chatBox.gameObject.SetActive(false);
         }
     }
 
@@ -60,6 +58,8 @@ public class UIManager : MonoBehaviour
         NetworkChatSystem.OnReceive -= OnChatMessageReceived;
         exitButton.onClick.RemoveListener(GameManager.Instance.ExitToMainMenu);
     }
+
+    public static event Action<string> OnChatBarSubmit;
 
     private void OnOpenChat(InputAction.CallbackContext ctx)
     {
@@ -102,7 +102,7 @@ public class UIManager : MonoBehaviour
 
     private void ResetChatBoxTimer()
     {
-        _chatBoxTimer = chatShowDurationSeconds;
+        chatBoxTimer = chatShowDurationSeconds;
     }
 
     private void OnSubmit(InputAction.CallbackContext ctx)
@@ -154,6 +154,4 @@ public class UIManager : MonoBehaviour
         chatBox.gameObject.SetActive(true);
         ResetChatBoxTimer();
     }
-
-    public static event OnMessageSubmittedDelegate OnChatBarSubmit;
 }
