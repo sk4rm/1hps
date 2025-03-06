@@ -44,7 +44,7 @@ public class NetworkChatSystem : NetworkBehaviour
             return;
         }
 
-        SendChatRpc($"Player {NetworkManager.Singleton.LocalClient}: {message}");
+        SendChatRpc($"{GameManager.Instance.localPlayerDisplayName}: {message}");
     }
 
     [Rpc(SendTo.ClientsAndHost)]
