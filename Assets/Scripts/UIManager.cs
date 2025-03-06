@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
         PlayerInputManager.Instance.Actions.UI.OpenChat.performed += OnOpenChat;
         PlayerInputManager.Instance.Actions.UI.Submit.performed += OnSubmit;
         PlayerInputManager.Instance.Actions.UI.Cancel.performed += OnCancel;
-        NetworkChatSystem.OnReceive += OnChatMessageReceived;
+        ChatManager.OnReceive += OnChatMessageReceived;
         exitButton.onClick.AddListener(GameManager.Instance.ExitToMainMenu);
     }
 
@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
         PlayerInputManager.Instance.Actions.UI.OpenChat.performed -= OnOpenChat;
         PlayerInputManager.Instance.Actions.UI.Submit.performed -= OnSubmit;
         PlayerInputManager.Instance.Actions.UI.Cancel.performed -= OnCancel;
-        NetworkChatSystem.OnReceive -= OnChatMessageReceived;
+        ChatManager.OnReceive -= OnChatMessageReceived;
         exitButton.onClick.RemoveListener(GameManager.Instance.ExitToMainMenu);
     }
 

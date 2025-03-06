@@ -3,7 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NetworkChatSystem : NetworkBehaviour
+public class ChatManager : NetworkBehaviour
 {
     private string messageOfTheDay;
 

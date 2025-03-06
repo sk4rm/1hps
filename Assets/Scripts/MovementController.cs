@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
-public class NetworkPlayerController : NetworkBehaviour
+public class MovementController : NetworkBehaviour
 {
     [Header("Movement")] [SerializeField] private new Rigidbody rigidbody;
     [SerializeField] private new Camera camera;
