@@ -165,7 +165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  defaultDisplayName: ???
   displayName:
     m_InternalValue:
       utf8LengthInBytes: 3
@@ -513,7 +512,7 @@ MonoBehaviour:
   rigidbody: {fileID: 4190348843952322456}
   camera: {fileID: 0}
   speed: 10
-  jumpHeight: 0.5
+  jumpHeight: 1.25
   turnSpeed: 15
   maxAttackRange: 5
   chopEfficiency: 10
@@ -545,7 +544,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  defaultDisplayName: ???
   displayName:
     m_InternalValue:
       utf8LengthInBytes: 3
