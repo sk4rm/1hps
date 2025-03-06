@@ -2,7 +2,7 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
-public class ChopInteraction : NetworkBehaviour, IInteractable
+public class Choppable : NetworkBehaviour, IInteractable
 {
     [SerializeField] private float initialChopDurability = 10f;
 
@@ -19,8 +19,7 @@ public class ChopInteraction : NetworkBehaviour, IInteractable
     }
 
     public event Action<NetworkBehaviourReference> OnChopFinish;
-
-
+    
     public override void OnNetworkDespawn()
     {
         transform.root.gameObject.SetActive(false);
