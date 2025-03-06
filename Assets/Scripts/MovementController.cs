@@ -36,8 +36,7 @@ public class MovementController : NetworkBehaviour
         var direction = forward * axis.y + right * axis.x;
         Move(direction);
 
-        if (PlayerInputManager.Instance.Actions.Player.Move.IsPressed())
-            Look(lastDirection);
+        Look(lastDirection);
     }
 
     private void OnEnable()
@@ -73,7 +72,7 @@ public class MovementController : NetworkBehaviour
         };
         rigidbody.linearVelocity = velocity;
 
-        lastDirection = direction;
+        if (direction.magnitude != 0) lastDirection = direction;
     }
 
     private void Jump(InputAction.CallbackContext ctx)
