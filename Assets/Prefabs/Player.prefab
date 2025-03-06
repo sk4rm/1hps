@@ -367,6 +367,7 @@ GameObject:
   - component: {fileID: 6253638560025523683}
   - component: {fileID: -5032901327320759752}
   - component: {fileID: 4783915970054878439}
+  - component: {fileID: 5895808844710469316}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -514,8 +515,6 @@ MonoBehaviour:
   speed: 10
   jumpHeight: 1.25
   turnSpeed: 15
-  maxAttackRange: 5
-  chopEfficiency: 1
 --- !u!114 &-5032901327320759752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,6 +613,21 @@ MonoBehaviour:
         byte0060: 0
         byte0061: 0
   nameTag: {fileID: 7081714051733831595}
+--- !u!114 &5895808844710469316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4892509814137612261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e974cd39c344d30ae87542a472459b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  chopEfficiency: 1
+  maxChopRange: 5
 --- !u!1 &4900580812998343504
 GameObject:
   m_ObjectHideFlags: 0

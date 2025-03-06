@@ -2,7 +2,7 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Choppable : NetworkBehaviour, IInteractable
+public class Choppable : NetworkBehaviour
 {
     [SerializeField] private float initialChopDurability = 10f;
 
@@ -13,11 +13,6 @@ public class Choppable : NetworkBehaviour, IInteractable
         chopDurability = new NetworkVariable<float>(initialChopDurability);
     }
 
-    public void Interact()
-    {
-        ChopRpc(1);
-    }
-
     public event Action<NetworkBehaviourReference> OnChopFinish;
     
     public override void OnNetworkDespawn()
@@ -26,7 +21,7 @@ public class Choppable : NetworkBehaviour, IInteractable
     }
 
     [Rpc(SendTo.Server)]
-    private void ChopRpc(float chopEfficiency)
+    public void ChopRpc(float chopEfficiency)
     {
         chopDurability.Value = Mathf.Max(0, chopDurability.Value - chopEfficiency);
         if (chopDurability.Value == 0f) OnChopFinish?.Invoke(this);

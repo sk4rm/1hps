@@ -10,9 +10,6 @@ public class MovementController : NetworkBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float jumpHeight = 10f;
     [SerializeField] private float turnSpeed = 10f;
-    [SerializeField] private float maxAttackRange = 5f;
-
-    [Header("Chop")] [SerializeField] private float chopEfficiency = 1f;
 
     private bool isOnGround;
     private Vector3 lastDirection;
@@ -39,16 +36,14 @@ public class MovementController : NetworkBehaviour
         Look(lastDirection);
     }
 
-    private void OnEnable()
+    public override void OnNetworkSpawn()
     {
         PlayerInputManager.Instance.Actions.Player.Jump.performed += Jump;
-        PlayerInputManager.Instance.Actions.Player.Attack.performed += Attack;
     }
 
-    private void OnDisable()
+    public override void OnNetworkDespawn()
     {
         PlayerInputManager.Instance.Actions.Player.Jump.performed -= Jump;
-        PlayerInputManager.Instance.Actions.Player.Attack.performed -= Attack;
     }
 
     private void OnCollisionExit()
@@ -72,6 +67,7 @@ public class MovementController : NetworkBehaviour
         };
         rigidbody.linearVelocity = velocity;
 
+        
         if (direction.magnitude != 0) lastDirection = direction;
     }
 
@@ -92,22 +88,5 @@ public class MovementController : NetworkBehaviour
 
         var rotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
-    }
-
-    private void Attack(InputAction.CallbackContext ctx)
-    {
-        if (!IsOwner) return;
-
-        Physics.Raycast(
-            transform.position,
-            camera.transform.forward,
-            out var hit,
-            maxAttackRange
-        );
-
-        if (hit.collider == null) return;
-
-        if (hit.collider.gameObject.TryGetComponent<IInteractable>(out var interactable))
-            interactable.Interact();
     }
 }
