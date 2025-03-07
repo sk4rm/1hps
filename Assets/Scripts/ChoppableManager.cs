@@ -5,7 +5,7 @@ public class ChoppableManager : NetworkBehaviour
 {
     public static ChoppableManager Instance;
 
-    [SerializeField] private Choppable[] choppableObjects;
+    [SerializeField] private ChoppableBehaviour[] choppableObjects;
 
     public override void OnNetworkSpawn()
     {
@@ -22,7 +22,7 @@ public class ChoppableManager : NetworkBehaviour
 
         #endregion
 
-        choppableObjects = FindObjectsByType<Choppable>(FindObjectsSortMode.None);
+        choppableObjects = FindObjectsByType<ChoppableBehaviour>(FindObjectsSortMode.None);
         foreach (var choppable in choppableObjects) choppable.OnChopFinish += DespawnRpc;
     }
 
@@ -34,7 +34,7 @@ public class ChoppableManager : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void DespawnRpc(NetworkBehaviourReference choppable)
     {
-        choppable.TryGet<Choppable>(out var choppedObject);
+        choppable.TryGet<ChoppableBehaviour>(out var choppedObject);
         choppedObject.NetworkObject.Despawn(false);
     }
 

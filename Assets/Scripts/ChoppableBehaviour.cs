@@ -2,7 +2,7 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Choppable : NetworkBehaviour
+public class ChoppableBehaviour : NetworkBehaviour
 {
     [SerializeField] private float initialChopDurability = 10f;
 

@@ -2,17 +2,14 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ChopInteractor : NetworkBehaviour
+public class ChopBehaviour : NetworkBehaviour
 {
     [SerializeField] private float chopEfficiency = 1f;
     [SerializeField] private float maxChopRange = 5f;
     
-    private new Camera camera;
-    
     public override void OnNetworkSpawn()
     {
         PlayerInputManager.Instance.Actions.Player.Attack.performed += Chop;
-        camera = Camera.main;
     }
 
     public override void OnNetworkDespawn()
@@ -23,25 +20,22 @@ public class ChopInteractor : NetworkBehaviour
     private void Chop(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
-        ChopRpc();
+        ChopRpc(transform.forward);
     }
 
     [Rpc(SendTo.Server)]
-    private void ChopRpc()
+    private void ChopRpc(Vector3 direction)
     {
-        // FIXME chopRpc not working on remote client
-        print("chop rpc called from chop interactor");
-        
         Physics.Raycast(
             transform.position,
-            camera.transform.forward,
+            direction,
             out var hit,
             maxChopRange
         );
 
         if (hit.collider == null) return;
 
-        if (hit.collider.gameObject.TryGetComponent<Choppable>(out var choppable))
+        if (hit.collider.gameObject.TryGetComponent<ChoppableBehaviour>(out var choppable))
             choppable.ChopRpc(chopEfficiency);
     }
 }
