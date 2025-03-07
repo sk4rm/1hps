@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuManager : MonoBehaviour
+public class MainMenuManager : NetworkBehaviour
 {
     [Header("Main Menu Interface")] [SerializeField]
     private Button hostButton;
@@ -33,9 +33,6 @@ public class MainMenuManager : MonoBehaviour
 
         backToMainMenuButton.onClick.AddListener(HideJoinMenu);
         joinMenuSubmitButton.onClick.AddListener(SubmitJoinRequest);
-
-        NetworkManager.Singleton.OnClientDisconnectCallback += OnConnectionFailed;
-        NetworkManager.Singleton.OnConnectionEvent += OnConnectionEvent;
     }
 
     private void OnDisable()
@@ -46,7 +43,16 @@ public class MainMenuManager : MonoBehaviour
 
         backToMainMenuButton.onClick.RemoveListener(HideJoinMenu);
         joinMenuSubmitButton.onClick.RemoveListener(SubmitJoinRequest);
+    }
 
+    public override void OnNetworkSpawn()
+    {
+        NetworkManager.Singleton.OnClientDisconnectCallback += OnConnectionFailed;
+        NetworkManager.Singleton.OnConnectionEvent += OnConnectionEvent;
+    }
+    
+    public override void OnNetworkDespawn()
+    {
         NetworkManager.Singleton.OnClientDisconnectCallback -= OnConnectionFailed;
         NetworkManager.Singleton.OnConnectionEvent -= OnConnectionEvent;
     }

@@ -19,11 +19,19 @@ public class ChopInteractor : NetworkBehaviour
     {
         PlayerInputManager.Instance.Actions.Player.Attack.performed -= Chop;
     }
-
+    
     private void Chop(InputAction.CallbackContext ctx)
     {
         if (!IsOwner) return;
+        ChopRpc();
+    }
 
+    [Rpc(SendTo.Server)]
+    private void ChopRpc()
+    {
+        // FIXME chopRpc not working on remote client
+        print("chop rpc called from chop interactor");
+        
         Physics.Raycast(
             transform.position,
             camera.transform.forward,

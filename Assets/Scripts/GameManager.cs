@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(NetworkManager))]
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public string localPlayerDisplayName = "Host";
     public static GameManager Instance { get; private set; }
@@ -31,12 +31,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
-    private void OnEnable()
+    public override void OnNetworkSpawn()
     {
         NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnect;
     }
 
-    private void OnDisable()
+    public override void OnNetworkDespawn()
     {
         NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnect;
     }
