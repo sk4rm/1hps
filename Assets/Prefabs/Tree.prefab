@@ -357,3 +357,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   initialChopDurability: 10
+  resourceType: 0
+  resourceAmount: 1

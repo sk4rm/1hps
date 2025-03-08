@@ -36,16 +36,6 @@ public class MovementController : NetworkBehaviour
         Look(lastDirection);
     }
 
-    public override void OnNetworkSpawn()
-    {
-        PlayerInputManager.Instance.Actions.Player.Jump.performed += Jump;
-    }
-
-    public override void OnNetworkDespawn()
-    {
-        PlayerInputManager.Instance.Actions.Player.Jump.performed -= Jump;
-    }
-
     private void OnCollisionExit()
     {
         isOnGround = false;
@@ -54,6 +44,16 @@ public class MovementController : NetworkBehaviour
     private void OnCollisionStay()
     {
         isOnGround = true;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        PlayerInputManager.Instance.Actions.Player.Jump.performed += Jump;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        PlayerInputManager.Instance.Actions.Player.Jump.performed -= Jump;
     }
 
     private void Move(Vector3 direction)
@@ -67,7 +67,7 @@ public class MovementController : NetworkBehaviour
         };
         rigidbody.linearVelocity = velocity;
 
-        
+
         if (direction.magnitude != 0) lastDirection = direction;
     }
 

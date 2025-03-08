@@ -23,27 +23,16 @@ public class ChoppableManager : NetworkBehaviour
         #endregion
 
         choppableObjects = FindObjectsByType<ChoppableBehaviour>(FindObjectsSortMode.None);
-        foreach (var choppable in choppableObjects) choppable.OnChopFinish += DespawnRpc;
-    }
-
-    public override void OnNetworkDespawn()
-    {
-        foreach (var choppable in choppableObjects) choppable.OnChopFinish -= DespawnRpc;
     }
 
     [Rpc(SendTo.Server)]
-    private void DespawnRpc(NetworkBehaviourReference choppable)
-    {
-        choppable.TryGet<ChoppableBehaviour>(out var choppedObject);
-        choppedObject.NetworkObject.Despawn(false);
-    }
-
     public void RespawnAllRpc()
     {
         foreach (var choppable in choppableObjects)
         {
             choppable.ResetDurability();
             choppable.transform.root.gameObject.SetActive(true);
+            choppable.NetworkObject.Spawn();
         }
     }
 }

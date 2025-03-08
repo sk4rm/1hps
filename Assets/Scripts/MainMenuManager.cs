@@ -50,7 +50,7 @@ public class MainMenuManager : NetworkBehaviour
         NetworkManager.Singleton.OnClientDisconnectCallback += OnConnectionFailed;
         NetworkManager.Singleton.OnConnectionEvent += OnConnectionEvent;
     }
-    
+
     public override void OnNetworkDespawn()
     {
         NetworkManager.Singleton.OnClientDisconnectCallback -= OnConnectionFailed;
