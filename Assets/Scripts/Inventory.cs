@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Inventory : NetworkBehaviour
 {
-    [SerializeField] private NetworkVariable<int> wood = new();
+    [field: SerializeField] public NetworkVariable<int> Wood { get; } = new();
 
     [Rpc(SendTo.Server)]
     public void AddWoodRpc(int amount)
     {
-        wood.Value += amount;
+        Wood.Value += amount;
     }
 }

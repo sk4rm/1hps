@@ -658,6 +658,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0316b0610fc8f94890204d35ebc19fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Chopper>k__BackingField: {fileID: 5895808844710469316}
+  <Inventory>k__BackingField: {fileID: 8709475694924553072}
 --- !u!1 &4900580812998343504
 GameObject:
   m_ObjectHideFlags: 0

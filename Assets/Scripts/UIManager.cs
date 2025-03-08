@@ -22,8 +22,8 @@ public class UIManager : MonoBehaviour
     [Obsolete] private bool pauseHideChatTimer;
 
     [Header("Counters")] [SerializeField] private RectTransform woodCounter;
-    
-    [SerializeField] private TMP_Text woodCountText;
+
+    [field: SerializeField] public TMP_Text WoodCountText { get; private set; }
 
     private bool IsChatOpen => chatBox.gameObject.activeSelf && chatBar.gameObject.activeSelf;
 

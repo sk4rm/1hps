@@ -1,3 +1,4 @@
+using System;
 using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class NetworkPlayerSpawner : NetworkBehaviour
 {
     [SerializeField] private GameObject networkPlayerPrefab;
     [SerializeField] private Vector3 spawnPosition;
+    
+    public event Action<Player> OnPlayerSpawn;
 
     public override void OnNetworkSpawn()
     {
@@ -25,6 +28,9 @@ public class NetworkPlayerSpawner : NetworkBehaviour
         var networkObject = player.GetComponent<NetworkObject>();
         networkObject.SpawnWithOwnership(senderId);
         Debug.Log($"Spawned player {senderId} into the world!");
+        
+        var playerObject = player.GetComponent<Player>();
+        OnPlayerSpawn?.Invoke(playerObject);
 
         SetCinemachineTargetRpc(networkObject.NetworkObjectId, senderId);
     }
