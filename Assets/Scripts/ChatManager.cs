@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -33,6 +34,8 @@ public class ChatManager : NetworkBehaviour
 
     private void SendChat(string message)
     {
+        message = Regex.Replace(message, "<.*?>", string.Empty);
+
         if (message.StartsWith("/"))
         {
             if (TryExecuteSlashCommand(message, out var output))
@@ -58,12 +61,18 @@ public class ChatManager : NetworkBehaviour
     {
         if (command.StartsWith("/respawntrees"))
         {
-            ChoppableManager.Instance.RespawnAllRpc();
-            output = $"<i>{NetworkManager.Singleton.LocalClientId} respawned all trees!</i>";
+            RespawnTreesRpc();
+            output = $"<i>{GameManager.Instance.localPlayerDisplayName} respawned all trees!</i>";
             return true;
         }
 
         output = "<i>Invalid command</i>";
         return false;
+    }
+
+    [Rpc(SendTo.Server)]
+    private void RespawnTreesRpc()
+    {
+        ChoppableBehaviour.RespawnChopped();
     }
 }

@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
 public class ChoppableBehaviour : NetworkBehaviour
 {
+    private static readonly List<ChoppableBehaviour> Choppables = new();
     [SerializeField] private float initialChopDurability = 10f;
     [SerializeField] private ItemType resourceType;
     [SerializeField] private int resourceAmount = 1;
@@ -19,6 +22,12 @@ public class ChoppableBehaviour : NetworkBehaviour
     }
 
     public event Action<NetworkBehaviourReference> OnChopFinish;
+
+    public override void OnNetworkSpawn()
+    {
+        Choppables.Add(this);
+        ResetDurability();
+    }
 
     public override void OnNetworkDespawn()
     {
@@ -37,8 +46,18 @@ public class ChoppableBehaviour : NetworkBehaviour
         }
     }
 
-    public void ResetDurability()
+    private void ResetDurability()
     {
         chopDurability.Value = initialChopDurability;
+    }
+
+    public static void RespawnChopped()
+    {
+        var disabled = Choppables.Where(c => !c.NetworkObject.IsSpawned).ToList();
+        foreach (var c in disabled)
+        {
+            c.transform.root.gameObject.SetActive(true);
+            c.NetworkObject.Spawn();
+        }
     }
 }
