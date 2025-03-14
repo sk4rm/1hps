@@ -3,7 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ChopBehaviour : NetworkBehaviour
+public class Chopper : NetworkBehaviour
 {
     [SerializeField] private float chopEfficiency = 1f;
     [SerializeField] private float maxChopRange = 5f;

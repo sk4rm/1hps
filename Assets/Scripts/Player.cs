@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [field: SerializeField] public ChopBehaviour Chopper { get; private set; }
+    [field: SerializeField] public Chopper Chopper { get; private set; }
     [field: SerializeField] public Inventory Inventory { get; private set; }
 
     private void OnEnable()
