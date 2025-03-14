@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
         PlayerInputManager.Instance.Actions.UI.Cancel.performed += OnCancel;
         ChatManager.OnReceive += OnChatMessageReceived;
         exitButton.onClick.AddListener(GameManager.Instance.ExitToMainMenu);
-        woodCounter.gameObject.SetActive(true);
+        woodCounter?.gameObject.SetActive(true);
     }
 
     private void OnDisable()
@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour
         PlayerInputManager.Instance.Actions.UI.Cancel.performed -= OnCancel;
         ChatManager.OnReceive -= OnChatMessageReceived;
         exitButton.onClick.RemoveListener(GameManager.Instance.ExitToMainMenu);
-        woodCounter.gameObject.SetActive(false);
+        if (woodCounter != null) woodCounter.gameObject.SetActive(false);
     }
 
     public static event Action<string> OnChatBarSubmit;

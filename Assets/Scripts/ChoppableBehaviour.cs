@@ -26,7 +26,7 @@ public class ChoppableBehaviour : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         Choppables.Add(this);
-        ResetDurability();
+        ResetDurabilityRpc();
     }
 
     public override void OnNetworkDespawn()
@@ -46,7 +46,8 @@ public class ChoppableBehaviour : NetworkBehaviour
         }
     }
 
-    private void ResetDurability()
+    [Rpc(SendTo.Server)]
+    private void ResetDurabilityRpc()
     {
         chopDurability.Value = initialChopDurability;
     }

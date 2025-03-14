@@ -12,7 +12,7 @@ public class MovementController : NetworkBehaviour
     [SerializeField] private float turnSpeed = 10f;
 
     private bool isOnGround;
-    private Vector3 lastDirection;
+    private Vector3 lastDirection = Vector3.forward;
 
     private void Awake()
     {

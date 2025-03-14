@@ -2506,6 +2506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 946977445}
+  - component: {fileID: 946977447}
   - component: {fileID: 946977446}
   m_Layer: 0
   m_Name: Main Menu Manager
@@ -2541,6 +2542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d28c6ad061a0194289b4deda1bd0d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   hostButton: {fileID: 1031449210}
   joinButton: {fileID: 935921231}
   settingsButton: {fileID: 224143128}
@@ -2552,6 +2554,31 @@ MonoBehaviour:
   nicknameInputField: {fileID: 1484908976}
   joinMenuSubmitButton: {fileID: 473356608}
   errorText: {fileID: 455618310}
+--- !u!114 &946977447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946977444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2658433766
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &1031449208
 GameObject:
   m_ObjectHideFlags: 0

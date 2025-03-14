@@ -1,6 +1,8 @@
+using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
     [field: SerializeField] public Chopper Chopper { get; private set; }
     [field: SerializeField] public Inventory Inventory { get; private set; }
