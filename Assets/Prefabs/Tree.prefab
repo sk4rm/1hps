@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba42c5c05da78f44a88b9923a878d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Choppable>k__BackingField: {fileID: 5631467424725785835}
+  choppable: {fileID: 5631467424725785835}
   pivot: {fileID: 1715971192822556053}
   visualFeedbackDamping: 10
 --- !u!1 &4148929731965583311

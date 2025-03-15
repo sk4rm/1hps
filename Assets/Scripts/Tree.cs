@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 
 public class Tree : MonoBehaviour
 {
-    [field: SerializeField] public ChoppableBehaviour Choppable { get; private set; }
+    [SerializeField] private ChoppableBehaviour choppable;
     [SerializeField] private Transform pivot;
     [SerializeField] private float visualFeedbackDamping = 1f;
     
@@ -16,12 +15,12 @@ public class Tree : MonoBehaviour
 
     private void OnEnable()
     {
-        Choppable.OnChop += OnChop;
+        choppable.OnChop += OnChop;
     }
 
     private void OnDisable()
     {
-        Choppable.OnChop -= OnChop;
+        choppable.OnChop -= OnChop;
     }
 
     private void OnChop()
