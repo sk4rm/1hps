@@ -8,7 +8,7 @@ public class ChoppableBehaviour : NetworkBehaviour
 {
     private static readonly List<ChoppableBehaviour> Choppables = new();
     [SerializeField] private float initialChopDurability = 10f;
-    [SerializeField] private ItemType resourceType;
+    [SerializeField] private ItemType resourceType = ItemType.Wood;
     [SerializeField] private int resourceAmount = 1;
 
     private NetworkVariable<float> chopDurability;

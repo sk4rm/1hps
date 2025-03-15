@@ -6,7 +6,8 @@ public class World : NetworkBehaviour
 {
     [SerializeField] private NetworkPlayerSpawner playerSpawner;
     [SerializeField] private UI ui;
-    [field: SerializeField] public Player Player { get; private set; }
+    [field: SerializeField] public Player LocalPlayer { get; private set; }
+    [field: SerializeField] public Shop.Shop Cabin { get; private set; }
 
     private void OnEnable()
     {
@@ -29,9 +30,9 @@ public class World : NetworkBehaviour
         playerObject.TryGet<Player>(out var player);
         if (!player.IsOwner) return;
         
-        Player = player;
-        Player.Inventory.Wood.OnValueChanged += UpdateWoodCount;
-        print($"Bound player {Player.OwnerClientId}");
+        LocalPlayer = player;
+        LocalPlayer.Inventory.Wood.OnValueChanged += UpdateWoodCount;
+        print($"Bound player {LocalPlayer.OwnerClientId}");
     }
 
     private void UpdateWoodCount(int previousCount, int newCount)

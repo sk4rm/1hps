@@ -4532,6 +4532,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2846533571338166807}
   - component: {fileID: 3580603873570157406}
+  - component: {fileID: 7534464377083975888}
+  - component: {fileID: 8798331883664778794}
   m_Layer: 0
   m_Name: Cabin
   m_TagString: Untagged
@@ -4626,6 +4628,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 21.072735, y: 8.449296, z: 21.056135}
   m_Center: {x: 0, y: 3.724648, z: 0}
+--- !u!114 &7534464377083975888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9069998579926059119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f2f0e2a3e5499098d22495d001e47c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8798331883664778794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9069998579926059119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c212f7a3e69cc4ba3cf12ed4839740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Offers>k__BackingField:
+  - {fileID: 11400000, guid: 443739c42bbc2d1439ceb5513ccc9005, type: 2}
+  interactable: {fileID: 7534464377083975888}
 --- !u!1 &9131711007506997007
 GameObject:
   m_ObjectHideFlags: 0

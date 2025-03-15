@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 5895808844710469316}
   - component: {fileID: 8709475694924553072}
   - component: {fileID: 744380592260071541}
+  - component: {fileID: 8752449559430247300}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -644,7 +645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  wood:
+  <Wood>k__BackingField:
     m_InternalValue: 0
 --- !u!114 &744380592260071541
 MonoBehaviour:
@@ -658,8 +659,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0316b0610fc8f94890204d35ebc19fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   <Chopper>k__BackingField: {fileID: 5895808844710469316}
   <Inventory>k__BackingField: {fileID: 8709475694924553072}
+--- !u!114 &8752449559430247300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4892509814137612261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9621ca592a3e478d888849cb6de221e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  maxReach: 10
 --- !u!1 &4900580812998343504
 GameObject:
   m_ObjectHideFlags: 0
