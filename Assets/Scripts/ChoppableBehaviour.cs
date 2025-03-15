@@ -21,6 +21,7 @@ public class ChoppableBehaviour : NetworkBehaviour
         chopDurability = new NetworkVariable<float>(initialChopDurability);
     }
 
+    public event Action OnChop;
     public event Action<NetworkBehaviourReference> OnChopFinish;
 
     public override void OnNetworkSpawn()
@@ -38,6 +39,7 @@ public class ChoppableBehaviour : NetworkBehaviour
     public void ChopRpc(float chopEfficiency)
     {
         chopDurability.Value = Mathf.Max(0, chopDurability.Value - chopEfficiency);
+        OnChop?.Invoke();
 
         if (chopDurability.Value == 0f)
         {

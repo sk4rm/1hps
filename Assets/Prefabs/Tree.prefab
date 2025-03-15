@@ -1,5 +1,39 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1754581671139596489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1715971192822556053}
+  m_Layer: 0
+  m_Name: Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1715971192822556053
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1754581671139596489}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4196345390427387766}
+  - {fileID: 7719780186957929255}
+  - {fileID: 3969744104003476245}
+  m_Father: {fileID: 6049503583200859577}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2604012077420209344
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,6 +44,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6049503583200859577}
   - component: {fileID: 4046939781386882527}
+  - component: {fileID: 5442770491976158878}
+  - component: {fileID: 5631467424725785835}
+  - component: {fileID: 8100986240304325188}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -28,11 +65,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 4196345390427387766}
-  - {fileID: 7719780186957929255}
-  - {fileID: 3969744104003476245}
+  - {fileID: 1715971192822556053}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4046939781386882527
@@ -60,6 +95,60 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!136 &5442770491976158878
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2604012077420209344}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.625
+  m_Height: 5
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &5631467424725785835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2604012077420209344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8156dd2420909dc4aa9becf3e4119ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  initialChopDurability: 10
+  resourceType: 0
+  resourceAmount: 1
+--- !u!114 &8100986240304325188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2604012077420209344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ba42c5c05da78f44a88b9923a878d32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Choppable>k__BackingField: {fileID: 5631467424725785835}
+  pivot: {fileID: 1715971192822556053}
+  visualFeedbackDamping: 10
 --- !u!1 &4148929731965583311
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +180,7 @@ Transform:
   m_LocalScale: {x: 5.0525265, y: 5.0525265, z: 5.0525265}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 6049503583200859577}
+  m_Father: {fileID: 1715971192822556053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5101757770000120248
 MeshFilter:
@@ -177,7 +266,7 @@ Transform:
   m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 6049503583200859577}
+  m_Father: {fileID: 1715971192822556053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3364668462651456574
 MeshFilter:
@@ -243,8 +332,6 @@ GameObject:
   - component: {fileID: 4196345390427387766}
   - component: {fileID: 6736636828945516620}
   - component: {fileID: 3149912454454722743}
-  - component: {fileID: 1021421338115733034}
-  - component: {fileID: 7862866193963565781}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -265,7 +352,7 @@ Transform:
   m_LocalScale: {x: 1.25, y: 2.5, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6049503583200859577}
+  m_Father: {fileID: 1715971192822556053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6736636828945516620
 MeshFilter:
@@ -320,42 +407,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1021421338115733034
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6879149076426642041}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &7862866193963565781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6879149076426642041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8156dd2420909dc4aa9becf3e4119ed5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  initialChopDurability: 10
-  resourceType: 0
-  resourceAmount: 1
