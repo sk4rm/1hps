@@ -1,8 +1,9 @@
 using Unity.Netcode;
+using UnityEngine;
 
 public class Inventory : NetworkBehaviour
 {
-    public NetworkVariable<int> Wood { get; } = new();
+    [field: SerializeField] public NetworkVariable<int> Wood { get; private set; } = new();
 
     [Rpc(SendTo.Server)]
     public void AddWoodRpc(int amount)
