@@ -16,12 +16,12 @@ public class ChatManager : NetworkBehaviour
 
     private void OnEnable()
     {
-        UIManager.OnChatBarSubmit += SendChat;
+        UI.OnChatBarSubmit += SendChat;
     }
 
     private void OnDisable()
     {
-        UIManager.OnChatBarSubmit -= SendChat;
+        UI.OnChatBarSubmit -= SendChat;
     }
 
     public static event Action<string> OnReceive;

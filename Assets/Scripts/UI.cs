@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UI : MonoBehaviour
 {
     [Header("Chat UI")] [SerializeField] private RectTransform chatBox;
     [SerializeField] private TextMeshProUGUI chatBoxText;

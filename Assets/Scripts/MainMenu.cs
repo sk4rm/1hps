@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuManager : NetworkBehaviour
+public class MainMenu : NetworkBehaviour
 {
     [Header("Main Menu Interface")] [SerializeField]
     private Button hostButton;

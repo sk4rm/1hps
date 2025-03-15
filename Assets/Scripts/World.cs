@@ -2,10 +2,10 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
-public class WorldManager : NetworkBehaviour
+public class World : NetworkBehaviour
 {
     [SerializeField] private NetworkPlayerSpawner playerSpawner;
-    [SerializeField] private UIManager ui;
+    [SerializeField] private UI ui;
     [field: SerializeField] public Player Player { get; private set; }
 
     private void OnEnable()
