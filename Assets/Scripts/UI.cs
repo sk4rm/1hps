@@ -22,8 +22,9 @@ public class UI : MonoBehaviour
     [Obsolete] private bool pauseHideChatTimer;
 
     [Header("Counters")] [SerializeField] private RectTransform woodCounter;
-
     [field: SerializeField] public TMP_Text WoodCountText { get; private set; }
+    [SerializeField] private RectTransform moneyCounter;
+    [field: SerializeField] public TMP_Text MoneyCountText { get; private set; }
 
     private bool IsChatOpen => chatBox.gameObject.activeSelf && chatBar.gameObject.activeSelf;
 
@@ -53,6 +54,7 @@ public class UI : MonoBehaviour
         ChatManager.OnReceive += OnChatMessageReceived;
         exitButton.onClick.AddListener(GameManager.Instance.ExitToMainMenu);
         woodCounter?.gameObject.SetActive(true);
+        moneyCounter?.gameObject.SetActive(true);
     }
 
     private void OnDisable()
@@ -63,6 +65,7 @@ public class UI : MonoBehaviour
         ChatManager.OnReceive -= OnChatMessageReceived;
         exitButton.onClick.RemoveListener(GameManager.Instance.ExitToMainMenu);
         if (woodCounter != null) woodCounter.gameObject.SetActive(false);
+        if (moneyCounter != null) moneyCounter.gameObject.SetActive(false);
     }
 
     public static event Action<string> OnChatBarSubmit;

@@ -32,6 +32,7 @@ public class World : NetworkBehaviour
         
         LocalPlayer = player;
         LocalPlayer.Inventory.Wood.OnValueChanged += UpdateWoodCount;
+        LocalPlayer.Inventory.Money.OnValueChanged += UpdateMoneyCount;
         print($"Bound player {LocalPlayer.OwnerClientId}");
         
         Cabin.Menu.SellWoodButton.onClick.AddListener(SellPlayerWood);
@@ -45,5 +46,10 @@ public class World : NetworkBehaviour
     private void SellPlayerWood()
     {
         LocalPlayer.Inventory.SellWoodRpc(Cabin.MoneyPerWood);
+    }
+
+    private void UpdateMoneyCount(int previousCount, int newCount)
+    {
+        ui.MoneyCountText.text = $"${newCount.ToString()}";
     }
 }
