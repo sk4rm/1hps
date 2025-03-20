@@ -1,20 +1,16 @@
-## Todo
+## TODO
 
-- [ ] Slug moves slowly, and deals contact damage.
-- [ ] Auto kick if host close.
+- [x] Auto kick if host close.
+- [x] Player name tag.
 - [ ] Player join, leave message.
-- [ ] Player name tag.
-
-## Concept
-
-General idea is 1 HP regardless of class.
-
-## Class
-
-Equipment determines the play style.
-
-| Equipment | Class  | Notes          |
-|-----------|--------|----------------|
-| Staff     | Summon | Default but OP |
-| Bow/Gun   | DPS    | Glass cannon   |
-| Shield    | Tank   | Survivability  |
+- [ ] Upgrade: chop efficiency
+- [ ] Upgrade: movement speed
+- [ ] Stack-based UI layering
+- [ ] Swing axe instead of raycast
+- [ ] Tree health bar
+- [ ] Respawning trees
+- [ ] Upgrade: tree respawning modes (random, AoE, all)
+- [ ]
+- [ ]
+- [ ]
+- [ ]
