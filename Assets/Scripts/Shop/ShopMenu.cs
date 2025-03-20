@@ -12,11 +12,13 @@ namespace Shop
         public void Open()
         {
             gameObject.SetActive(true);
+            GameManager.Instance.UnlockCursor();
         }
         
         public void Close()
         {
             gameObject.SetActive(false);
+            GameManager.Instance.LockCursor();
         }
     }
 }
