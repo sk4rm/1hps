@@ -4654,6 +4654,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Offers>k__BackingField:
   - {fileID: 11400000, guid: 443739c42bbc2d1439ceb5513ccc9005, type: 2}
+  <Menu>k__BackingField: {fileID: 0}
+  <MoneyPerWood>k__BackingField: 1
   interactable: {fileID: 7534464377083975888}
 --- !u!1 &9131711007506997007
 GameObject:
