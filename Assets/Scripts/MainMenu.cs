@@ -48,24 +48,17 @@ public class MainMenu : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         NetworkManager.Singleton.OnClientDisconnectCallback += OnConnectionFailed;
-        NetworkManager.Singleton.OnConnectionEvent += OnConnectionEvent;
     }
 
     public override void OnNetworkDespawn()
     {
         NetworkManager.Singleton.OnClientDisconnectCallback -= OnConnectionFailed;
-        NetworkManager.Singleton.OnConnectionEvent -= OnConnectionEvent;
     }
 
     private void OnConnectionFailed(ulong _)
     {
         errorText.text = "Connection timed out!";
         joinMenuSubmitButton.interactable = true;
-    }
-
-    private void OnConnectionEvent(NetworkManager networkManager, ConnectionEventData connectionEventData)
-    {
-        print($"Event Type: {connectionEventData.EventType}, From: {connectionEventData.ClientId}");
     }
 
     private void ShowJoinMenu()
