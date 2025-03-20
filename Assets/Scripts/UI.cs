@@ -7,6 +7,11 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
+    public CinemachineCamera CinemachineCamera { get; set; }
+
+    private CinemachineInputAxisController CinemachineInputAxisController =>
+        CinemachineCamera.GetComponent<CinemachineInputAxisController>();
+
     [Header("Chat UI")] [SerializeField] private RectTransform chatBox;
     [SerializeField] private TextMeshProUGUI chatBoxText;
     [SerializeField] private RectTransform chatBar;
@@ -16,10 +21,8 @@ public class UI : MonoBehaviour
     [Header("Pause Menu")] [SerializeField]
     private RectTransform pauseMenu;
 
-    [SerializeField] private CinemachineInputAxisController cinemachineInputAxisController;
     [SerializeField] private Button exitButton;
     private float chatBoxTimer;
-    [Obsolete] private bool pauseHideChatTimer;
 
     [Header("Counters")] [SerializeField] private RectTransform woodCounter;
     [field: SerializeField] public TMP_Text WoodCountText { get; private set; }
@@ -32,9 +35,6 @@ public class UI : MonoBehaviour
     {
         chatBarInputField.onFocusSelectAll = true;
         EnablePlayerControls();
-
-        if (cinemachineInputAxisController == null)
-            cinemachineInputAxisController = Camera.main!.GetComponent<CinemachineInputAxisController>();
     }
 
     private void Update()
@@ -91,14 +91,14 @@ public class UI : MonoBehaviour
     private void EnablePlayerControls()
     {
         PlayerInputManager.Instance.Actions.Player.Enable();
-        cinemachineInputAxisController.enabled = true;
+        CinemachineInputAxisController.enabled = true;
         GameManager.Instance.LockCursor();
     }
 
     private void DisablePlayerControls()
     {
         PlayerInputManager.Instance.Actions.Player.Disable();
-        cinemachineInputAxisController.enabled = false;
+        CinemachineInputAxisController.enabled = false;
         GameManager.Instance.UnlockCursor();
     }
 

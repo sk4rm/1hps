@@ -1,4 +1,5 @@
 using System;
+using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -6,17 +7,29 @@ public class World : NetworkBehaviour
 {
     [SerializeField] private NetworkPlayerSpawner playerSpawner;
     [SerializeField] private UI ui;
-    [field: SerializeField] public Player LocalPlayer { get; private set; }
+    [SerializeField] private CinemachineCamera cinemachineCamera;
     [field: SerializeField] public Shop.Shop Cabin { get; private set; }
+    
+    [Header("Runtime Fields")]
+    [field: SerializeField] public Player LocalPlayer { get; private set; }
+
+    private void Awake()
+    {
+        ui.CinemachineCamera = cinemachineCamera;
+    }
 
     private void OnEnable()
     {
         playerSpawner.OnPlayerSpawn += BindPlayer;
+        Cabin.Menu.OnOpen += OnCabinMenuOpen;
+        Cabin.Menu.OnClose += OnCabinMenuClose;
     }
 
     private void OnDisable()
     {
         playerSpawner.OnPlayerSpawn -= BindPlayer;
+        Cabin.Menu.OnOpen -= OnCabinMenuOpen;
+        Cabin.Menu.OnClose -= OnCabinMenuClose;
     }
     
     private void BindPlayer(Player p)
@@ -36,6 +49,16 @@ public class World : NetworkBehaviour
         print($"Bound player {LocalPlayer.OwnerClientId}");
         
         Cabin.Menu.SellWoodButton.onClick.AddListener(SellPlayerWood);
+    }
+    
+    private void OnCabinMenuOpen()
+    {
+        cinemachineCamera.GetComponent<CinemachineInputAxisController>().enabled = false;
+    }
+    
+    private void OnCabinMenuClose()
+    {
+        cinemachineCamera.GetComponent<CinemachineInputAxisController>().enabled = true;
     }
 
     private void UpdateWoodCount(int previousCount, int newCount)
